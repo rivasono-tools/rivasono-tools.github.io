@@ -1,4 +1,4 @@
-(() => {
+( function () {
   // DOM Elements
   const DOM = {
     header: getEl("header"),
@@ -16,7 +16,15 @@
     cropper: getEl(".cropper"),
     liveDpi: getEl("#liveDpi"),
     liveResolution: getEl("#liveResolution"),
-    cropButton: getEl("#cropButton")
+    cropButton: getEl("#cropButton"),
+    cropModal: getEl("#cropModal"),
+    cropModalImg: getEl("#cropModalImg"),
+    cropModalFileNameInput: getEl("#cropModalFileNameInput"),
+    cropModalSaveButton: getEl("#cropModalSaveButton"),
+    closeCropModalButton: getEl("#closeCropModalButton"),
+    cropperMirrorButtonHorizontal: getEl(".cropper-mirror-button-horizontal"),
+    cropperMirrorButtonVertical: getEl(".cropper-mirror-button-vertical"),
+    dpiQualityIndicator: getEl("#dpiQualityIndicator")
   };
 
   window.onload = () => {
@@ -33,6 +41,10 @@
     ratio: {
       width: 0,
       height: 0
+    },
+    orientation: {
+      x: "normal",
+      y: "normal"
     }
   };
 
@@ -137,6 +149,8 @@
       }
       if (!croppie.isInitialized) {
         croppieInstance = new Croppie(DOM.cropper, {
+          enableExif: true,
+          enableOrientation: true,
           viewport: { width: croppie.width / panel.ratio.height, height: croppie.height / panel.ratio.width },
           boundary: { width: croppie.width, height: croppie.height }
         });
@@ -146,11 +160,40 @@
       DOM.cropper.addEventListener("update", e => {
         let liveCropWidth = Number(e.detail.points[2]) - Number(e.detail.points[0]);
         let liveCropHeight = Number(e.detail.points[3]) - Number(e.detail.points[1]);
-        DOM.liveDpi.innerHTML = roundTo(0, liveCropWidth / (panel.width / 2.54));
         DOM.liveResolution.innerHTML = `${liveCropWidth} x ${liveCropHeight}`;
+        let liveDpiValue = roundTo(0, liveCropWidth / (panel.width / 2.54));
+        DOM.liveDpi.innerHTML = liveDpiValue;
+        if (liveDpiValue < 50) {
+          DOM.dpiQualityIndicator.innerHTML = "<i class='fas fa-exclamation-circle left'></i>De dpi is te laag, afbeelding wordt onscherp."
+        } else if (liveDpiValue < 100) {
+          DOM.dpiQualityIndicator.innerHTML = "<i class='fas fa-dot-circle left'></i>De dpi is oké, afbeelding kan onscherp zijn van dichtbij."
+        } else {
+          DOM.dpiQualityIndicator.innerHTML = "<i class='fas fa-check-circle left'></i>De dpi is perfect! De afbeelding heeft maximale scherpte."
+        }
       });
+      getEl(".cropper-rotate-button-left").addEventListener("click", () => {
+        croppieInstance.rotate(90);
+      });
+      getEl(".cropper-rotate-button-right").addEventListener("click", () => {
+        croppieInstance.rotate(-90);
+      });
+      changeVisibility("show", [getEl(".cropper-rotate-buttons")]);
       changeVisibility("show", [DOM.cropButton]);
     }
+  }
+
+  function openCropModal() {
+    changeVisibility("show", [DOM.cropModal]);
+    croppieInstance.result({ type: "blob", size: "original", format: "jpeg" }).then(blob => {
+      const filenameSplitFromExtension = uploadInput.files[0].name.split(".");
+      const newFileName = `${filenameSplitFromExtension[0]}-BxH-${panel.width}x${panel.height}-cropped.jpg`;
+      DOM.cropModalFileNameInput.value = newFileName;
+      const croppedImageUrl = URL.createObjectURL(blob);
+      DOM.cropModalImg.setAttribute("src", croppedImageUrl);
+      DOM.cropModalSaveButton.addEventListener("click", () => {
+        download(blob, newFileName, "image/jpg");
+      });
+    });
   }
 
   // Event listeners
@@ -199,10 +242,31 @@
   });
 
   DOM.cropButton.addEventListener("click", () => {
-    croppieInstance.result({ type: "blob", size: "original", format: "jpeg" }).then(blob => {
-      console.log(blob);
-      download(blob, `${uploadInput.files[0].name}-cropped.jpeg`, "image/jpeg");
-    });
+    openCropModal();
+  });
+
+  DOM.closeCropModalButton.addEventListener("click", () => {
+    changeVisibility("hide", [DOM.cropModal])
+  });
+
+  DOM.cropperMirrorButtonHorizontal.addEventListener("click", () => {
+    if (uploadedImg.orientation.x === "normal") {
+      croppieInstance.bind({ url: uploadedImg.url, zoom: 0, orientation: 2 });
+      uploadedImg.orientation.x = "flipped"
+    } else {
+      croppieInstance.bind({ url: uploadedImg.url, zoom: 0, orientation: 1 });
+      uploadedImg.orientation.x = "normal"
+    }
+  });
+
+  DOM.cropperMirrorButtonVertical.addEventListener("click", () => {
+    if (uploadedImg.orientation.y === "normal") {
+      croppieInstance.bind({ url: uploadedImg.url, zoom: 0, orientation: 4 });
+      uploadedImg.orientation.y = "flipped"
+    } else {
+      croppieInstance.bind({ url: uploadedImg.url, zoom: 0, orientation: 1 });
+      uploadedImg.orientation.y = "normal"
+    }
   });
 
   // Common functions

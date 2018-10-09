@@ -8,6 +8,10 @@ $black: #141414;
 $primary: #009ad9;
 $primary-dark: darken($primary, 15);
 
+$red: #E53935;
+$yellow: #ffab00;
+$green: #00C853;
+
 $bg-dark: #22272b;
 $bg-light: #30373d;
 
@@ -32,6 +36,67 @@ body {
   font-family: "Nunito", sans-serif;
   color: $white;
   position: relative;
+}
+
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  .modal-overlay {
+    background-color: rgba(0, 0, 0, 0.65);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    .modal-container {
+      width: 900px;
+      margin-top: 6vh;
+      background-color: $bg-light;
+      border-radius: 2px;
+      box-shadow: $box-shadow3;
+      .modal-title {
+        padding: 0 0 0 32px;
+        display: flex;
+        justify-content: space-between;
+      }
+      .closeModalButton {
+        background: none;
+        border: none;
+        color: $white;
+        font-size: 24px;
+        padding: 0 32px;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      .crop-modal-img-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        padding: 0 32px;
+        #cropModalImg {
+          max-width: 100%;
+          max-height: 600px;
+        }
+      }
+      .modal-buttons {
+        padding: 24px 32px;
+        display: flex;
+        justify-content: center;
+        input {
+          font-size: 16px;
+        }
+        button {
+          margin-left: 24px;
+          align-self: flex-end;
+        }
+      }
+    }
+  }
 }
 
 header {
@@ -68,7 +133,7 @@ input,
 button,
 select {
   font-family: "Nunito", sans-serif;
-  color: $white;
+  color: $black;
 }
 
 .button {
@@ -95,6 +160,7 @@ select {
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
+  appearance: none;
   margin: 0;
 }
 
@@ -158,29 +224,33 @@ input::-webkit-inner-spin-button {
     margin-left: 12px;
     align-self: flex-end;
   }
-  .input-group {
-    display: flex;
-    flex-direction: column;
-    label {
-      margin-bottom: 4px;
-      font-size: 16px;
-      font-weight: 600;
-    }
-    input {
-      border: none;
-      background-color: $white;
-      box-shadow: $box-shadow1;
-      padding: 8px 16px;
-      font-size: 18px;
-      font-weight: bold;
-      color: $primary-dark;
-      text-align: center;
-      border-radius: 6px;
-      -moz-appearance: textfield;
-      width: 95px;
-      &::placeholder {
-        color: $gray-dark;
-      }
+  .input-group input {
+    width: 95px;
+    text-align: center;
+  }
+}
+
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  label {
+    margin-bottom: 4px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  input {
+    border: none;
+    background-color: $white;
+    box-shadow: $box-shadow1;
+    padding: 8px 16px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 6px;
+    -moz-appearance: textfield;
+    width: 100%;
+    &::placeholder {
+      color: $gray-dark;
     }
   }
 }
@@ -245,6 +315,11 @@ input::-webkit-inner-spin-button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+}
+
+.cropper-rotate-buttons, .cr-slider-wrap, #cropButton {
+  z-index: 100;
 }
 
 #previewImg {
@@ -252,11 +327,36 @@ input::-webkit-inner-spin-button {
   max-height: 768px;
 }
 
-#liveDpi {
-  margin-top: 4px;
-  text-align: center;
+#dpiQualityIndicator {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-weight: bold;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.24);
+  i {
+    font-size: 24px;
+    margin-right: 12px;
+    text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.23);
+  }
+  i.fa-exclamation-circle {
+    color: $red;
+  }
+  i.fa-dot-circle {
+    color: $yellow;
+  }
+  i.fa-check-circle {
+    color: $green;
+  }
+}
+
+.cropper-rotate-buttons {
+  margin-bottom: 32px;
+  button {
+    margin-right: 16px;
+  }
+  button:last-child {
+    margin-left: 0;
+  }
 }
 
 // fas position classes
@@ -272,15 +372,19 @@ input::-webkit-inner-spin-button {
 .croppie-container {
   display: flex;
   flex-direction: column;
-  padding-top: 48px;
   height: unset;
   .cr-boundary {
-    box-shadow: $box-shadow3;
+    overflow: visible;
   }
   .cr-viewport {
     border-color: $primary;
   }
   .cr-slider-wrap {
     margin-top: 32px;
+  }
+  .cr-slider {
+    padding: 16px 24px;
+    border-radius: 4px;
+    background-color: $primary;
   }
 }
