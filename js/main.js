@@ -16,11 +16,7 @@
     cropper: getEl(".cropper"),
     liveDpi: getEl("#liveDpi"),
     liveResolution: getEl("#liveResolution"),
-    cropButton: getEl("#cropButton"),
-    cropModal: getEl("#cropModal"),
-    cropModalImg: getEl("#cropModalImg"),
-    cropModalFileNameInput: getEl("#cropModalFileNameInput"),
-    cropModalSaveButton: getEl("#cropModalSaveButton")
+    cropButton: getEl("#cropButton")
   };
 
   window.onload = () => {
@@ -141,8 +137,6 @@
       }
       if (!croppie.isInitialized) {
         croppieInstance = new Croppie(DOM.cropper, {
-          enableExif: true,
-          enableOrientation: true,
           viewport: { width: croppie.width / panel.ratio.height, height: croppie.height / panel.ratio.width },
           boundary: { width: croppie.width, height: croppie.height }
         });
@@ -155,30 +149,8 @@
         DOM.liveDpi.innerHTML = roundTo(0, liveCropWidth / (panel.width / 2.54));
         DOM.liveResolution.innerHTML = `${liveCropWidth} x ${liveCropHeight}`;
       });
-      getEl(".cropper-rotate-button-left").addEventListener("click", () => {
-        croppieInstance.rotate(90);
-      });
-      getEl(".cropper-rotate-button-right").addEventListener("click", () => {
-        croppieInstance.rotate(-90);
-      });
-      changeVisibility("show", [getEl(".cropper-rotate-buttons")]);
       changeVisibility("show", [DOM.cropButton]);
     }
-  }
-
-  function openCropModal() {
-    changeVisibility("show", [DOM.cropModal]);
-    croppieInstance.result({ type: "blob", size: "original", format: "jpeg" }).then(blob => {
-      const filenameSplitFromExtension = uploadInput.files[0].name.split(".");
-      const newFileName = `${filenameSplitFromExtension[0]}-BxH${panel.width}x${panel.height}-cropped.jpg`;
-      DOM.cropModalFileNameInput.value = newFileName;
-      const croppedImageUrl = URL.createObjectURL(blob);
-      DOM.cropModalImg.setAttribute("src", croppedImageUrl);
-      DOM.cropModalSaveButton.addEventListener("click", () => {
-        download(blob, newFileName, "image/jpg");
-      });
-    });
-
   }
 
   // Event listeners
@@ -227,7 +199,10 @@
   });
 
   DOM.cropButton.addEventListener("click", () => {
-    openCropModal();
+    croppieInstance.result({ type: "blob", size: "original", format: "jpeg" }).then(blob => {
+      console.log(blob);
+      download(blob, `${uploadInput.files[0].name}-cropped.jpeg`, "image/jpeg");
+    });
   });
 
   // Common functions

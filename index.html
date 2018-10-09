@@ -6,10 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Pixar</title>
-  <link rel="stylesheet" href="croppie.css">
+  <link rel="stylesheet" href="css/croppie.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
     crossorigin="anonymous">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
@@ -65,12 +65,15 @@
         <div class="specifications">
           <p class="spec">Resolutie (px): <span class="spec-value" id="liveResolution">?</span></p>
           <p class="spec">Dpi na bijsnijden:<span class="spec-value" id="liveDpi">?</span></p>
+          <p class="spec "id="dpiQualityIndicator"></p>
         </div>
       </div>
     </div>
     <div class="cropper-container container">
       <div class="cropper-rotate-buttons hidden">
         <button class="button cropper-rotate-button-left">Draai linksom</button>
+        <button class="button cropper-mirror-button-horizontal">Spiegel horizontaal</button>
+        <button class="button cropper-mirror-button-vertical">Spiegel verticaal</button>
         <button class="button cropper-rotate-button-right">Draai rechtsom</button>
       </div>
       <div class="cropper">
@@ -99,9 +102,9 @@
       </div>
     </div>
   </div>
-  <script src="croppie.min.js"></script>
-  <script src="download.js"></script>
-  <script src="main.js"></script>
+  <script src="js/croppie.min.js"></script>
+  <script src="js/download.js"></script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>
