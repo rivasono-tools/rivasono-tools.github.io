@@ -1,0 +1,365 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito:400,600,700");
+
+$white: #fff;
+$light-gray: #f2f2f2;
+$gray: #d9d9d9;
+$gray-dark: #3d3d3d;
+$black: #141414;
+$primary: #009ad9;
+$primary-dark: darken($primary, 15);
+
+$bg-dark: #22272b;
+$bg-light: #30373d;
+
+$box-shadow1: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+$box-shadow3: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 600;
+}
+
+body {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  color: $white;
+  position: relative;
+}
+
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  .modal-overlay {
+    background-color: rgba(0, 0, 0, 0.65);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    .modal-container {
+      width: 900px;
+      margin-top: 6vh;
+      background-color: $bg-light;
+      border-radius: 2px;
+      box-shadow: $box-shadow3;
+      .modal-title {
+        padding: 0 0 0 32px;
+        display: flex;
+        justify-content: space-between;
+      }
+      .closeModalButton {
+        background: none;
+        border: none;
+        color: $white;
+        font-size: 24px;
+        padding: 0 32px;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      .crop-modal-img-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        padding: 0 32px;
+        #cropModalImg {
+          max-width: 100%;
+          max-height: 600px;
+        }
+      }
+      .modal-buttons {
+        padding: 24px 32px;
+        display: flex;
+        justify-content: center;
+        input {
+          font-size: 16px;
+        }
+        button {
+          margin-left: 24px;
+          align-self: flex-end;
+        }
+      }
+    }
+  }
+}
+
+header {
+  position: absolute;
+  width: 100%;
+  background-color: $bg-light;
+  padding: 8px 36px;
+  box-shadow: $box-shadow1;
+  z-index: 999;
+  .header-title {
+    color: $white;
+    margin: 0;
+    font-size: 26px;
+    text-align: center;
+  }
+}
+
+main {
+  height: 100vh;
+  display: flex;
+}
+
+#side-bar {
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: $bg-light;
+  z-index: 1000;
+  border-right: 2px solid darken($bg-light, 4);
+}
+
+input,
+button,
+select {
+  font-family: "Nunito", sans-serif;
+  color: $black;
+}
+
+.button {
+  display: inline-block;
+  background-color: $primary;
+  padding: 12px 16px;
+  font-size: 18px;
+  color: $white;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  &:hover {
+    cursor: pointer;
+    background-color: lighten($primary, 10);
+  }
+  background-color: $primary;
+  align-self: center;
+  &:hover {
+    cursor: pointer;
+    background-color: lighten($primary, 10);
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.container {
+  position: relative;
+  padding-bottom: 32px;
+  &:first-child .container-header-container {
+    border-top: none;
+  }
+  &:last-child {
+    border-bottom: 2px solid darken($bg-light, 4);
+  }
+  hr {
+    width: 100%;
+    border: none;
+    height: 2px;
+    background-color: darken($bg-light, 4);
+    margin-top: 0;
+  }
+}
+
+.container-blocker {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-header {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.container-header-container {
+  padding: 12px 32px;
+  text-align: center;
+  margin-bottom: 12px;
+  background-color: lighten($bg-light, 8);
+  border-bottom: 2px solid darken($bg-light, 4);
+  border-top: 2px solid darken($bg-light, 4);
+}
+
+#panel-size-container {
+  .panel-size-inputs {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  .panel-size-inputs-divider {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 0 16px 8px;
+    align-self: flex-end;
+  }
+  button {
+    padding: 8px 12px;
+    margin-left: 12px;
+    align-self: flex-end;
+  }
+  .input-group input {
+    width: 95px;
+    text-align: center;
+  }
+}
+
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  label {
+    margin-bottom: 4px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  input {
+    border: none;
+    background-color: $white;
+    box-shadow: $box-shadow1;
+    padding: 8px 16px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 6px;
+    -moz-appearance: textfield;
+    width: 100%;
+    &::placeholder {
+      color: $gray-dark;
+    }
+  }
+}
+
+.result-label {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+#image-upload-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.hidden {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.specifications {
+  display: flex;
+  flex-direction: column;
+  padding: 0 32px;
+}
+
+.spec-header {
+  margin: 12px 0 0;
+  font-weight: bold;
+}
+
+.spec {
+  position: relative;
+  display: flex;
+  margin: 4px 0 0;
+}
+
+.spec-value {
+  font-weight: 600;
+  position: absolute;
+  right: 0;
+  text-align: right;
+}
+
+.file-uploaded-message {
+  margin-top: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 32px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.cropper-container {
+  flex-grow: 1;
+  background-color: $bg-dark;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.cropper-rotate-buttons, .cr-slider-wrap, #cropButton {
+  z-index: 100;
+}
+
+#previewImg {
+  max-width: 768px;
+  max-height: 768px;
+}
+
+#liveDpi {
+  margin-top: 4px;
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.cropper-rotate-buttons {
+  margin-bottom: 32px;
+  button:last-child {
+    margin-left: 16px;
+  }
+}
+
+// fas position classes
+.fas.left {
+  margin-right: 8px;
+}
+
+.fas.right {
+  margin-left: 8px;
+}
+
+// Croppie restyling
+.croppie-container {
+  display: flex;
+  flex-direction: column;
+  height: unset;
+  .cr-boundary {
+  }
+  .cr-viewport {
+    border-color: $primary;
+  }
+  .cr-slider-wrap {
+    margin-top: 32px;
+  }
+  .cr-slider {
+    padding: 16px 24px;
+    border-radius: 4px;
+  }
+}

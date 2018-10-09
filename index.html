@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Pixar</title>
+  <link rel="stylesheet" href="croppie.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <header>
+    <h1 class="header-title">Pixar</h1>
+  </header>
+  <main>
+    <div id="side-bar">
+      <div class="container" id="image-upload-container">
+        <div class="container-header-container">
+          <span class="container-header">Gegevens gewenste afbeelding</span>
+        </div>
+        <label class="upload-input-label button" for="uploadInput"><i class="fas fa-file-image left"></i>Upload afbeelding</label>
+        <input class="upload-input hidden" type="file" id="uploadInput">
+        <p class="file-uploaded-message">Upload een afbeelding...</p>
+        <hr>
+        <div class="specifications">
+          <p class="spec">Verhouding:<span class="spec-value" id="imgRatio">?</span></p>
+          <p class="spec">Resolutie (px):<span class="spec-value" id="imgResolution">?</span></p>
+          <h4 class="spec-header">Max. afmetingen (cm):</h4>
+          <p class="spec">50 dpi:<span class="spec-value" id="imgMaxSize50dpi">?</span></p>
+          <p class="spec">100 dpi:<span class="spec-value" id="imgMaxSize100dpi">?</span></p>
+        </div>
+      </div>
+      <div id="panel-size-container" class="container">
+        <div class="container-header-container">
+          <span class="container-header">Gegevens gewenst paneel</span>
+        </div>
+        <div class="panel-size-inputs">
+          <div class="input-group">
+            <label for="panel-width">Breedte (cm)</label>
+            <input type="number" name="panel-width" id="panel-width" placeholder="0">
+          </div>
+          <span class="panel-size-inputs-divider"><i class="fas fa-times"></i></span>
+          <div class="input-group">
+            <label for="panel-height">Hoogte (cm)</label>
+            <input type="number" name="panel-height" id="panel-height" placeholder="0">
+          </div>
+          <button class="button" id="panel-size-confirm"><i class="fas fa-check"></i></button>
+        </div>
+        <hr>
+        <div class="specifications">
+          <p class="spec">Beeldverhouding paneel: <span class="spec-value" id="panel-ratio-label">?</span></p>
+          <h4 class="spec-header">Benodigde pixels afbeelding:</h4>
+          <p class="spec">Bij 50 dpi: <span class="spec-value" id="panel-pixel-ratio-label-dpi50">?</span></p>
+          <p class="spec">Bij 100 dpi: <span class="spec-value" id="panel-pixel-ratio-label-dpi100">?</span></p>
+        </div>
+      </div>
+      <div id="comparison-container" class="container">
+        <div class="container-header-container">
+          <span class="container-header">Gegevens na bijsnijden</span>
+        </div>
+        <div class="specifications">
+          <p class="spec">Resolutie (px): <span class="spec-value" id="liveResolution">?</span></p>
+          <p class="spec">Dpi na bijsnijden:<span class="spec-value" id="liveDpi">?</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="cropper-container container">
+      <div class="cropper-rotate-buttons hidden">
+        <button class="button cropper-rotate-button-left">Draai linksom</button>
+        <button class="button cropper-rotate-button-right">Draai rechtsom</button>
+      </div>
+      <div class="cropper">
+        <img src="" alt="" id="previewImg">
+      </div>
+      <button class="button hidden" id="cropButton"><i class="fas fa-crop-alt left"></i>Crop</button>
+    </div>
+
+  </main>
+  <div class="modal hidden" id="cropModal">
+    <div class="modal-overlay">
+      <div class="modal-container">
+        <div class="modal-title">
+          <h2>Crop resultaat</h2><button class="closeModalButton" id="closeCropModalButton"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="crop-modal-img-container">
+          <img src="" alt="" id="cropModalImg">
+        </div>
+        <div class="modal-buttons">
+          <div class="input-group">
+            <label for="cropModalFileName">Bestandsnaam gecropte afbeelding:</label>
+            <input type="text" name="cropModalFileName" id="cropModalFileNameInput">
+          </div>
+          <button class="button" id="cropModalSaveButton" ><i class="fas fa-save left"></i>Opslaan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="croppie.min.js"></script>
+  <script src="download.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
