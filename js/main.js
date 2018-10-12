@@ -1,4 +1,4 @@
-( function () {
+(function() {
   // DOM Elements
   const DOM = {
     header: getEl("header"),
@@ -29,12 +29,13 @@
 
   window.onload = () => {
     getEl(".header-title").style["padding-left"] = DOM.sideBar.clientWidth + "px";
-    DOM.cropperContainer.style["padding-top"] = DOM.header.clientHeight + "px";
+    DOM.cropperContainer.style["padding-top"] = DOM.header.clientHeight + 32 + "px";
   };
 
   // Uploaded image properties
-  let uploadedImg = {
+  let uploadedFile = {
     isUploaded: false,
+    type: "",
     url: "",
     width: 0,
     height: 0,
@@ -70,7 +71,7 @@
     height: 600
   };
 
-  // Global functions
+  // Functions
   function validateAndSavePanelSizeValues() {
     panel.width = DOM.panelWidthInput.value;
     panel.height = DOM.panelHeightInput.value;
@@ -140,8 +141,58 @@
     panel.isSpecified = true;
   }
 
+  function checkUploadedFileFiletype(dataURL) {
+    if (dataURL.substring(5, 15) === "image/jpeg") {
+      return "jpeg";
+    } else if (dataURL.substring(5, 14) === "image/png") {
+      return "png";
+    } else if (dataURL.substring(5, 20) === "application/pdf") {
+      return "pdf";
+    } else {
+      return "other";
+    }
+  }
+
+  function convertFromPdfToJpegAndPreview() {
+    pdfjsLib.getDocument(uploadedFile.url).then(pdf => {
+      const pdfCanvas = getEl("#pdfCanvas");
+      pdf.getPage(1).then(page => {
+        const renderContext = {
+          canvasContext: pdfCanvas.getContext("2d"),
+          viewport: page.getViewport(1)
+        };
+        pdfCanvas.width = renderContext.viewport.width;
+        pdfCanvas.height = renderContext.viewport.height;
+        page.render(renderContext).then(() => {
+          const pdfToJpgUrl = pdfCanvas.toDataURL("image/jpeg");
+          uploadedFile.url = pdfToJpgUrl;
+          previewUploadedImg();
+        });
+      });
+    });
+  }
+
+  function previewUploadedImg() {
+    getEl(".file-uploaded-message").innerHTML = `${uploadInput.files[0].name}`;
+    getEl(".file-uploaded-message").setAttribute("title", `${uploadInput.files[0].name}`);
+    previewImg.setAttribute("src", uploadedFile.url);
+    previewImg.onload = () => {
+      uploadedFile.width = previewImg.naturalWidth;
+      uploadedFile.height = previewImg.naturalHeight;
+      calculateRatio(uploadedFile);
+      getEl("#imgRatio").innerHTML = `${uploadedFile.ratio.width} : ${uploadedFile.ratio.height}`;
+      getEl("#imgResolution").innerHTML = `${uploadedFile.width} x ${uploadedFile.height}`;
+      getEl("#imgMaxSize50dpi").innerHTML =
+        roundTo(1, (uploadedFile.width / 50) * 2.54) + " x " + roundTo(1, (uploadedFile.height / 50) * 2.54);
+      getEl("#imgMaxSize100dpi").innerHTML =
+        roundTo(1, (uploadedFile.width / 100) * 2.54) + " x " + roundTo(1, (uploadedFile.height / 100) * 2.54);
+      uploadedFile.isUploaded = true;
+      loadCropper();
+    };
+  }
+
   function loadCropper() {
-    if (uploadedImg.isUploaded && panel.isSpecified) {
+    if (uploadedFile.isUploaded && panel.isSpecified) {
       changeVisibility("hide", [DOM.previewImg]);
       if (croppie.isInitialized) {
         croppieInstance.destroy();
@@ -156,7 +207,7 @@
         });
         croppie.isInitialized = true;
       }
-      croppieInstance.bind({ url: uploadedImg.url, zoom: 0 });
+      croppieInstance.bind({ url: uploadedFile.url, zoom: 0 });
       DOM.cropper.addEventListener("update", e => {
         let liveCropWidth = Number(e.detail.points[2]) - Number(e.detail.points[0]);
         let liveCropHeight = Number(e.detail.points[3]) - Number(e.detail.points[1]);
@@ -164,11 +215,14 @@
         let liveDpiValue = roundTo(0, liveCropWidth / (panel.width / 2.54));
         DOM.liveDpi.innerHTML = liveDpiValue;
         if (liveDpiValue < 50) {
-          DOM.dpiQualityIndicator.innerHTML = "<i class='fas fa-exclamation-circle left'></i>De dpi is te laag, afbeelding wordt onscherp."
+          DOM.dpiQualityIndicator.innerHTML =
+            "<i class='fas fa-exclamation-circle left'></i>De dpi is te laag, afbeelding wordt onscherp.";
         } else if (liveDpiValue < 100) {
-          DOM.dpiQualityIndicator.innerHTML = "<i class='fas fa-dot-circle left'></i>De dpi is oké, afbeelding kan onscherp zijn van dichtbij."
+          DOM.dpiQualityIndicator.innerHTML =
+            "<i class='fas fa-dot-circle left'></i>De dpi is oké, afbeelding kan onscherp zijn van dichtbij.";
         } else {
-          DOM.dpiQualityIndicator.innerHTML = "<i class='fas fa-check-circle left'></i>De dpi is perfect! De afbeelding heeft maximale scherpte."
+          DOM.dpiQualityIndicator.innerHTML =
+            "<i class='fas fa-check-circle left'></i>De dpi is perfect! De afbeelding heeft maximale scherpte.";
         }
       });
       getEl(".cropper-rotate-button-left").addEventListener("click", () => {
@@ -177,7 +231,7 @@
       getEl(".cropper-rotate-button-right").addEventListener("click", () => {
         croppieInstance.rotate(-90);
       });
-      changeVisibility("show", [getEl(".cropper-rotate-buttons")]);
+      // changeVisibility("show", [getEl(".cropper-rotate-buttons")]);
       changeVisibility("show", [DOM.cropButton]);
     }
   }
@@ -219,53 +273,72 @@
   });
 
   uploadInput.addEventListener("change", () => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      uploadedImg.url = reader.result;
-      getEl(".file-uploaded-message").innerHTML = `Geüpload: ${uploadInput.files[0].name}`;
-      previewImg.setAttribute("src", uploadedImg.url);
-      previewImg.onload = () => {
-        uploadedImg.width = previewImg.naturalWidth;
-        uploadedImg.height = previewImg.naturalHeight;
-        calculateRatio(uploadedImg);
-        getEl("#imgRatio").innerHTML = `${uploadedImg.ratio.width} : ${uploadedImg.ratio.height}`;
-        getEl("#imgResolution").innerHTML = `${uploadedImg.width} x ${uploadedImg.height}`;
-        getEl("#imgMaxSize50dpi").innerHTML =
-          roundTo(1, (uploadedImg.width / 50) * 2.54) + " x " + roundTo(1, (uploadedImg.height / 50) * 2.54);
-        getEl("#imgMaxSize100dpi").innerHTML =
-          roundTo(1, (uploadedImg.width / 100) * 2.54) + " x " + roundTo(1, (uploadedImg.height / 100) * 2.54);
-        uploadedImg.isUploaded = true;
-        loadCropper();
-      };
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      uploadedFile.url = fileReader.result;
+      uploadedFile.type = checkUploadedFileFiletype(uploadedFile.url);
+      if (uploadedFile.type === "pdf") {
+        convertFromPdfToJpegAndPreview();
+      } else if (uploadedFile.type === "other") {
+        alert("Bestand is geen jpeg/jpg, png of pdf.");
+      } else {
+        previewUploadedImg();
+      }
     };
-    reader.readAsDataURL(uploadInput.files[0]);
+    fileReader.readAsDataURL(uploadInput.files[0]);
   });
+
+  /* pdfUploadInput.addEventListener("change", () => {
+    const pdfUploadFileReader = new FileReader();
+    pdfUploadFileReader.onload = () => {
+      uploadedPdf.url = pdfUploadFileReader.result;
+      console.log(uploadedPdf.url);
+      pdfjsLib.getDocument(uploadedPdf.url).then(pdf => {
+        let canvas = getEl("#test-canvas");
+        pdf.getPage(1).then(page => {
+          let renderContext = {
+            canvasContext: canvas.getContext("2d"),
+            viewport: page.getViewport(1)
+          };
+          canvas.width = renderContext.viewport.width;
+          canvas.height = renderContext.viewport.height;
+          let renderTask = page.render(renderContext);
+          renderTask.then(function() {
+            console.log("page rendered");
+            let pdfToJpgUrl = canvas.toDataURL("image/jpeg");
+            DOM.previewImg.setAttribute("src", pdfToJpgUrl);
+          });
+        });
+      });
+    };
+    pdfUploadFileReader.readAsDataURL(pdfUploadInput.files[0]);
+  }); */
 
   DOM.cropButton.addEventListener("click", () => {
     openCropModal();
   });
 
   DOM.closeCropModalButton.addEventListener("click", () => {
-    changeVisibility("hide", [DOM.cropModal])
+    changeVisibility("hide", [DOM.cropModal]);
   });
 
   DOM.cropperMirrorButtonHorizontal.addEventListener("click", () => {
-    if (uploadedImg.orientation.x === "normal") {
-      croppieInstance.bind({ url: uploadedImg.url, zoom: 0, orientation: 2 });
-      uploadedImg.orientation.x = "flipped"
+    if (uploadedFile.orientation.x === "normal") {
+      croppieInstance.bind({ url: uploadedFile.url, zoom: 0, orientation: 2 });
+      uploadedFile.orientation.x = "flipped";
     } else {
-      croppieInstance.bind({ url: uploadedImg.url, zoom: 0, orientation: 1 });
-      uploadedImg.orientation.x = "normal"
+      croppieInstance.bind({ url: uploadedFile.url, zoom: 0, orientation: 1 });
+      uploadedFile.orientation.x = "normal";
     }
   });
 
   DOM.cropperMirrorButtonVertical.addEventListener("click", () => {
-    if (uploadedImg.orientation.y === "normal") {
-      croppieInstance.bind({ url: uploadedImg.url, zoom: 0, orientation: 4 });
-      uploadedImg.orientation.y = "flipped"
+    if (uploadedFile.orientation.y === "normal") {
+      croppieInstance.bind({ url: uploadedFile.url, zoom: 0, orientation: 4 });
+      uploadedFile.orientation.y = "flipped";
     } else {
-      croppieInstance.bind({ url: uploadedImg.url, zoom: 0, orientation: 1 });
-      uploadedImg.orientation.y = "normal"
+      croppieInstance.bind({ url: uploadedFile.url, zoom: 0, orientation: 1 });
+      uploadedFile.orientation.y = "normal";
     }
   });
 

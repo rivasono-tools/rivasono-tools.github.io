@@ -22,9 +22,12 @@
         <div class="container-header-container">
           <span class="container-header">Gegevens gewenste afbeelding</span>
         </div>
-        <label class="upload-input-label button" for="uploadInput"><i class="fas fa-file-image left"></i>Upload afbeelding</label>
+        <label class="upload-input-label button" for="uploadInput"><i class="fas fa-file-image left"></i>Upload
+          afbeelding</label>
         <input class="upload-input hidden" type="file" id="uploadInput">
-        <p class="file-uploaded-message">Upload een afbeelding...</p>
+        <div class="specifications file-specifications">
+          <p class="spec">Bestandsnaam:<span class="spec-value file-uploaded-message">?</span></p>
+        </div>
         <hr>
         <div class="specifications">
           <p class="spec">Verhouding:<span class="spec-value" id="imgRatio">?</span></p>
@@ -65,7 +68,7 @@
         <div class="specifications">
           <p class="spec">Resolutie (px): <span class="spec-value" id="liveResolution">?</span></p>
           <p class="spec">Dpi na bijsnijden:<span class="spec-value" id="liveDpi">?</span></p>
-          <p class="spec "id="dpiQualityIndicator"></p>
+          <p class="spec " id="dpiQualityIndicator"></p>
         </div>
       </div>
     </div>
@@ -83,6 +86,9 @@
     </div>
 
   </main>
+  <div id="canvas-container" class="hidden">
+    <canvas id="pdfCanvas"></canvas>
+  </div>
   <div class="modal hidden" id="cropModal">
     <div class="modal-overlay">
       <div class="modal-container">
@@ -97,11 +103,12 @@
             <label for="cropModalFileName">Bestandsnaam gecropte afbeelding:</label>
             <input type="text" name="cropModalFileName" id="cropModalFileNameInput">
           </div>
-          <button class="button" id="cropModalSaveButton" ><i class="fas fa-save left"></i>Opslaan</button>
+          <button class="button" id="cropModalSaveButton"><i class="fas fa-save left"></i>Opslaan</button>
         </div>
       </div>
     </div>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.550/pdf.min.js"></script>
   <script src="js/croppie.min.js"></script>
   <script src="js/download.js"></script>
   <script src="js/main.js"></script>
