@@ -61,7 +61,10 @@
   };
 
   // Cropped image properties
-  let croppedImg = {};
+  let fileToDownload = {
+    blob: "",
+    name: ""
+  };
 
   // Cropper properties
   let croppie = {
@@ -72,6 +75,10 @@
   };
 
   // Functions
+  function loadingSpinner(showOrHide) {
+    //changeVisibility(showOrHide, [getEl("#loadingSpinnerModal")]);
+  }
+
   function validateAndSavePanelSizeValues() {
     panel.width = DOM.panelWidthInput.value;
     panel.height = DOM.panelHeightInput.value;
@@ -193,6 +200,7 @@
 
   function loadCropper() {
     if (uploadedFile.isUploaded && panel.isSpecified) {
+      loadingSpinner("show");
       changeVisibility("hide", [DOM.previewImg]);
       if (croppie.isInitialized) {
         croppieInstance.destroy();
@@ -231,6 +239,7 @@
       getEl(".cropper-rotate-button-right").addEventListener("click", () => {
         croppieInstance.rotate(-90);
       });
+      loadingSpinner("hide");
       // changeVisibility("show", [getEl(".cropper-rotate-buttons")]);
       changeVisibility("show", [DOM.cropButton]);
     }
@@ -240,17 +249,20 @@
     changeVisibility("show", [DOM.cropModal]);
     croppieInstance.result({ type: "blob", size: "original", format: "jpeg" }).then(blob => {
       const filenameSplitFromExtension = uploadInput.files[0].name.split(".");
-      const newFileName = `${filenameSplitFromExtension[0]}-BxH-${panel.width}x${panel.height}-cropped.jpg`;
-      DOM.cropModalFileNameInput.value = newFileName;
+      fileToDownload.name = `${filenameSplitFromExtension[0]}-BxH-${panel.width}x${panel.height}-cropped.jpg`;
+      DOM.cropModalFileNameInput.value = fileToDownload.name;
       const croppedImageUrl = URL.createObjectURL(blob);
       DOM.cropModalImg.setAttribute("src", croppedImageUrl);
-      DOM.cropModalSaveButton.addEventListener("click", () => {
-        download(blob, newFileName, "image/jpg");
-      });
+      fileToDownload.blob = blob;
+      console.log(`${filenameSplitFromExtension[0]}-BxH-${panel.width}x${panel.height}-cropped.jpg`);
     });
   }
 
   // Event listeners
+  DOM.cropModalSaveButton.addEventListener("click", () => {
+    download(fileToDownload.blob, fileToDownload.name, "image/jpg");
+  });
+
   DOM.panelSizeConfirmButton.addEventListener("click", () => {
     validateAndSavePanelSizeValues();
     loadCropper();
@@ -273,6 +285,7 @@
   });
 
   uploadInput.addEventListener("change", () => {
+    loadingSpinner("show");
     const fileReader = new FileReader();
     fileReader.onload = () => {
       uploadedFile.url = fileReader.result;
@@ -287,32 +300,6 @@
     };
     fileReader.readAsDataURL(uploadInput.files[0]);
   });
-
-  /* pdfUploadInput.addEventListener("change", () => {
-    const pdfUploadFileReader = new FileReader();
-    pdfUploadFileReader.onload = () => {
-      uploadedPdf.url = pdfUploadFileReader.result;
-      console.log(uploadedPdf.url);
-      pdfjsLib.getDocument(uploadedPdf.url).then(pdf => {
-        let canvas = getEl("#test-canvas");
-        pdf.getPage(1).then(page => {
-          let renderContext = {
-            canvasContext: canvas.getContext("2d"),
-            viewport: page.getViewport(1)
-          };
-          canvas.width = renderContext.viewport.width;
-          canvas.height = renderContext.viewport.height;
-          let renderTask = page.render(renderContext);
-          renderTask.then(function() {
-            console.log("page rendered");
-            let pdfToJpgUrl = canvas.toDataURL("image/jpeg");
-            DOM.previewImg.setAttribute("src", pdfToJpgUrl);
-          });
-        });
-      });
-    };
-    pdfUploadFileReader.readAsDataURL(pdfUploadInput.files[0]);
-  }); */
 
   DOM.cropButton.addEventListener("click", () => {
     openCropModal();

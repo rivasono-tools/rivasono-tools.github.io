@@ -74,11 +74,14 @@ span {
         -webkit-box-pack: center;
         -ms-flex-pack: center;
         justify-content: center;
-        width: 100%;
-        padding: 0 32px; }
+        width: 900px;
+        padding: 0 32px;
+        -webkit-box-align: start;
+        -ms-flex-align: start;
+        align-items: flex-start; }
         .modal .modal-overlay .modal-container .crop-modal-img-container #cropModalImg {
-          max-width: 100%;
-          max-height: 600px; }
+          max-width: 866px;
+          max-height: 500px; }
       .modal .modal-overlay .modal-container .modal-buttons {
         padding: 24px 32px;
         display: -webkit-box;
@@ -342,6 +345,30 @@ input::-webkit-inner-spin-button {
   -ms-flex-align: center;
   align-items: center;
   overflow: hidden; }
+
+.loading-spinner-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 40vh; }
+  .loading-spinner-container .loading-spinner-content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column; }
+    .loading-spinner-container .loading-spinner-content i.fas {
+      font-size: 48px;
+      height: 48px;
+      width: 48px; }
+    .loading-spinner-container .loading-spinner-content span {
+      margin-top: 16px;
+      font-weight: 600; }
 
 .cropper-rotate-buttons,
 .cr-slider-wrap,
