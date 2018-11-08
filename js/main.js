@@ -224,13 +224,13 @@
         DOM.liveDpi.innerHTML = liveDpiValue;
         if (liveDpiValue < 50) {
           DOM.dpiQualityIndicator.innerHTML =
-            "<i class='fas fa-exclamation-circle left'></i>De dpi is te laag, afbeelding wordt onscherp.";
+            "<svg class='icon left error' aria-hidden='true' focusable='false'><use xlink:href='img/symbol-defs.svg#icon-alert-circle-outline'></use></svg>De dpi is te laag, afbeelding wordt onscherp.";
         } else if (liveDpiValue < 100) {
           DOM.dpiQualityIndicator.innerHTML =
-            "<i class='fas fa-dot-circle left'></i>De dpi is oké, afbeelding kan onscherp zijn van dichtbij.";
+            "<svg class='icon left warning' aria-hidden='true' focusable='false'><use xlink:href='img/symbol-defs.svg#icon-alert-triangle-outline'></use></svg>De dpi is oké, afbeelding kan onscherp zijn van dichtbij.";
         } else {
           DOM.dpiQualityIndicator.innerHTML =
-            "<i class='fas fa-check-circle left'></i>De dpi is perfect! De afbeelding heeft maximale scherpte.";
+            "<svg class='icon left success' aria-hidden='true' focusable='false'><use xlink:href='img/symbol-defs.svg#icon-checkmark-circle-2-outline'></use></svg>De dpi is perfect! De afbeelding heeft maximale scherpte.";
         }
       });
       getEl(".cropper-rotate-button-left").addEventListener("click", () => {

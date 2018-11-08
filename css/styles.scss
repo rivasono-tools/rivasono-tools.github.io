@@ -1,10 +1,11 @@
-@import url("https://fonts.googleapis.com/css?family=Nunito:400,600,700");
+@import url("https://fonts.googleapis.com/css?family=Nunito+Sans:400,700|Nunito:400,600,700");
 
 $white: #fff;
-$light-gray: #f2f2f2;
+$gray-light: #f2f2f2;
 $gray: #d9d9d9;
-$gray-dark: #3d3d3d;
-$black: #141414;
+$gray-dark: #999;
+$gray-darker: #595959;
+$black: #333;
 $primary: #009ad9;
 $primary-dark: darken($primary, 15);
 
@@ -12,11 +13,9 @@ $red: #e53935;
 $yellow: #ffab00;
 $green: #00c853;
 
-$bg-dark: #22272b;
-$bg-light: #30373d;
-
-$bg-dark: #22272b;
-$bg-light: #30373d;
+$bg-dark: $gray-light;
+$bg-light: $white;
+$border-color: $gray;
 
 $box-shadow1: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 $box-shadow2: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -33,12 +32,13 @@ h2,
 h3,
 h4 {
   font-weight: 600;
+  font-family: "Nunito Sans", sans-serif;
 }
 
 body {
   margin: 0;
   font-family: "Nunito", sans-serif;
-  color: $white;
+  color: $black;
   position: relative;
 }
 
@@ -72,7 +72,7 @@ span {
         display: flex;
         justify-content: space-between;
         background-color: $bg-light;
-        border-bottom: 2px solid darken($bg-light, 4);
+        border-bottom: 1px solid $border-color;
         margin-bottom: 32px;
       }
       .closeModalButton {
@@ -120,10 +120,10 @@ header {
   box-shadow: $box-shadow1;
   z-index: 999;
   .header-title {
-    color: $white;
     margin: 0;
     font-size: 26px;
     text-align: center;
+    font-weight: 700;
   }
 }
 
@@ -139,7 +139,7 @@ main {
   min-height: 100vh;
   background-color: $bg-light;
   z-index: 1000;
-  border-right: 2px solid darken($bg-light, 4);
+  border-right: 1px solid $border-color;
 }
 
 input,
@@ -152,14 +152,13 @@ select {
 .button {
   display: inline-block;
   background-color: $primary;
-  padding: 8px 16px;
+  padding: 8px 12px;
   font-size: 16px;
   color: $white;
-  font-weight: 600;
+  font-weight: 700;
   border: none;
-  border-radius: 8px;
-  box-shadow: $box-shadow2;
-  text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.24);
+  border-radius: 2px;
+  box-shadow: $box-shadow1;
   &:hover {
     cursor: pointer;
     background-color: lighten($primary, 10);
@@ -186,13 +185,13 @@ input::-webkit-inner-spin-button {
     border-top: none;
   }
   &:last-child {
-    border-bottom: 2px solid darken($bg-light, 4);
+    border-bottom: 1px solid $border-color;
   }
   hr {
     width: 100%;
     border: none;
-    height: 2px;
-    background-color: darken($bg-light, 4);
+    height: 1px;
+    background-color: $border-color;
     margin-top: 0;
   }
 }
@@ -208,17 +207,16 @@ input::-webkit-inner-spin-button {
 }
 
 .container-header {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 20px;
+  font-family: "Nunito Sans", sans-serif;
 }
 
 .container-header-container {
   padding: 12px 32px;
   text-align: center;
   margin-bottom: 12px;
-  background-color: lighten($bg-light, 8);
-  border-bottom: 2px solid darken($bg-light, 4);
-  border-top: 2px solid darken($bg-light, 4);
+  border-bottom: 1px solid $border-color;
 }
 
 #panel-size-container {
@@ -238,6 +236,7 @@ input::-webkit-inner-spin-button {
     padding: 8px 12px;
     margin-left: 12px;
     align-self: flex-end;
+    font-size: 18px;
   }
   .input-group input {
     width: 95px;
@@ -255,12 +254,12 @@ input::-webkit-inner-spin-button {
   }
   input {
     border: none;
-    background-color: $white;
+    background-color: $gray-light;
     box-shadow: $box-shadow1;
-    padding: 8px 16px;
+    padding: 8px 12px;
     font-size: 18px;
     font-weight: bold;
-    border-radius: 6px;
+    border-radius: 2px;
     -moz-appearance: textfield;
     width: 100%;
     &::placeholder {
@@ -369,19 +368,18 @@ input::-webkit-inner-spin-button {
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  i {
-    font-size: 24px;
+  svg {
+    font-size: 42px;
     margin-right: 12px;
-    text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.23);
-  }
-  i.fa-exclamation-circle {
-    color: $red;
-  }
-  i.fa-dot-circle {
-    color: $yellow;
-  }
-  i.fa-check-circle {
-    color: $green;
+    &.error {
+      fill: $red;
+    }
+    &.warning {
+      fill: $yellow;
+    }
+    &.success {
+      fill: $green;
+    }
   }
 }
 
@@ -395,13 +393,28 @@ input::-webkit-inner-spin-button {
   }
 }
 
-// fas position classes
+// Icon styling
 .fas.left {
   margin-right: 8px;
 }
 
 .fas.right {
   margin-left: 8px;
+}
+
+.icon {
+  fill: currentColor;
+  width: 1.3em;
+  height: 1.3em;
+  vertical-align: middle;
+  overflow: hidden;
+  margin-top: -2px;
+  &.left {
+    margin-right: 4px;
+  }
+  &.right {
+    margin-left: 4px;
+  }
 }
 
 // Croppie restyling

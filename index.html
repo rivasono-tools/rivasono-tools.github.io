@@ -7,8 +7,6 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Pixar</title>
   <link rel="stylesheet" href="css/croppie.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
-    crossorigin="anonymous">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 
@@ -22,7 +20,9 @@
         <div class="container-header-container">
           <span class="container-header">Gegevens gewenste afbeelding</span>
         </div>
-        <label class="upload-input-label button" for="uploadInput"><i class="fas fa-file-image left"></i>Upload
+        <label class="upload-input-label button" for="uploadInput"><svg class="icon left" aria-hidden="true" focusable="false">
+            <use xlink:href="/img/symbol-defs.svg#icon-image-outline"></use>
+          </svg>Upload
           afbeelding</label>
         <input class="upload-input hidden" type="file" id="uploadInput">
         <div class="specifications file-specifications">
@@ -51,7 +51,9 @@
             <label for="panel-height">Hoogte (cm)</label>
             <input type="number" name="panel-height" id="panel-height" placeholder="0">
           </div>
-          <button class="button" id="panel-size-confirm"><i class="fas fa-check"></i></button>
+          <button class="button" id="panel-size-confirm"><svg class="icon" aria-hidden="true" focusable="false">
+              <use xlink:href="/img/symbol-defs.svg#icon-checkmark-outline"></use>
+            </svg></button>
         </div>
         <hr>
         <div class="specifications">
@@ -82,7 +84,9 @@
       <div class="cropper">
         <img src="" alt="" id="previewImg">
       </div>
-      <button class="button hidden" id="cropButton"><i class="fas fa-crop-alt left"></i>Crop</button>
+      <button class="button hidden" id="cropButton"><svg class="icon left" aria-hidden="true" focusable="false">
+          <use xlink:href="/img/symbol-defs.svg#icon-crop-outline"></use>
+        </svg>Crop</button>
     </div>
 
   </main>

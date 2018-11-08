@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Nunito:400,600,700");
+@import url("https://fonts.googleapis.com/css?family=Nunito+Sans:400,700|Nunito:400,600,700");
 *,
 *::before,
 *::after {
@@ -9,12 +9,13 @@ h1,
 h2,
 h3,
 h4 {
-  font-weight: 600; }
+  font-weight: 600;
+  font-family: "Nunito Sans", sans-serif; }
 
 body {
   margin: 0;
   font-family: "Nunito", sans-serif;
-  color: #fff;
+  color: #333;
   position: relative; }
 
 p,
@@ -44,7 +45,7 @@ span {
     .modal .modal-overlay .modal-container {
       width: 900px;
       margin-top: 6vh;
-      background-color: #22272b;
+      background-color: #f2f2f2;
       border-radius: 2px;
       -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
@@ -56,8 +57,8 @@ span {
         -webkit-box-pack: justify;
         -ms-flex-pack: justify;
         justify-content: space-between;
-        background-color: #30373d;
-        border-bottom: 2px solid #272d32;
+        background-color: #fff;
+        border-bottom: 1px solid #d9d9d9;
         margin-bottom: 32px; }
       .modal .modal-overlay .modal-container .closeModalButton {
         background: none;
@@ -100,16 +101,16 @@ span {
 header {
   position: absolute;
   width: 100%;
-  background-color: #30373d;
+  background-color: #fff;
   padding: 8px 36px;
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   z-index: 999; }
   header .header-title {
-    color: #fff;
     margin: 0;
     font-size: 26px;
-    text-align: center; }
+    text-align: center;
+    font-weight: 700; }
 
 main {
   min-height: 100vh;
@@ -127,28 +128,27 @@ main {
   -ms-flex-direction: column;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #30373d;
+  background-color: #fff;
   z-index: 1000;
-  border-right: 2px solid #272d32; }
+  border-right: 1px solid #d9d9d9; }
 
 input,
 button,
 select {
   font-family: "Nunito", sans-serif;
-  color: #141414; }
+  color: #333; }
 
 .button {
   display: inline-block;
   background-color: #009ad9;
-  padding: 8px 16px;
+  padding: 8px 12px;
   font-size: 16px;
   color: #fff;
-  font-weight: 600;
+  font-weight: 700;
   border: none;
-  border-radius: 8px;
-  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.24);
+  border-radius: 2px;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   background-color: #009ad9;
   -ms-flex-item-align: center;
   align-self: center; }
@@ -171,12 +171,12 @@ input::-webkit-inner-spin-button {
   .container:first-child .container-header-container {
     border-top: none; }
   .container:last-child {
-    border-bottom: 2px solid #272d32; }
+    border-bottom: 1px solid #d9d9d9; }
   .container hr {
     width: 100%;
     border: none;
-    height: 2px;
-    background-color: #272d32;
+    height: 1px;
+    background-color: #d9d9d9;
     margin-top: 0; }
 
 .container-blocker {
@@ -195,16 +195,15 @@ input::-webkit-inner-spin-button {
   align-items: center; }
 
 .container-header {
-  font-weight: 600;
-  font-size: 20px; }
+  font-weight: 700;
+  font-size: 20px;
+  font-family: "Nunito Sans", sans-serif; }
 
 .container-header-container {
   padding: 12px 32px;
   text-align: center;
   margin-bottom: 12px;
-  background-color: #424c54;
-  border-bottom: 2px solid #272d32;
-  border-top: 2px solid #272d32; }
+  border-bottom: 1px solid #d9d9d9; }
 
 #panel-size-container .panel-size-inputs {
   display: -webkit-box;
@@ -230,7 +229,8 @@ input::-webkit-inner-spin-button {
   padding: 8px 12px;
   margin-left: 12px;
   -ms-flex-item-align: end;
-  align-self: flex-end; }
+  align-self: flex-end;
+  font-size: 18px; }
 
 #panel-size-container .input-group input {
   width: 95px;
@@ -250,23 +250,23 @@ input::-webkit-inner-spin-button {
     font-weight: 600; }
   .input-group input {
     border: none;
-    background-color: #fff;
+    background-color: #f2f2f2;
     -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    padding: 8px 16px;
+    padding: 8px 12px;
     font-size: 18px;
     font-weight: bold;
-    border-radius: 6px;
+    border-radius: 2px;
     -moz-appearance: textfield;
     width: 100%; }
     .input-group input::-webkit-input-placeholder {
-      color: #3d3d3d; }
+      color: #999; }
     .input-group input:-ms-input-placeholder {
-      color: #3d3d3d; }
+      color: #999; }
     .input-group input::-ms-input-placeholder {
-      color: #3d3d3d; }
+      color: #999; }
     .input-group input::placeholder {
-      color: #3d3d3d; }
+      color: #999; }
 
 .result-label {
   font-weight: bold;
@@ -330,7 +330,7 @@ input::-webkit-inner-spin-button {
   -webkit-box-flex: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
-  background-color: #22272b;
+  background-color: #f2f2f2;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -391,16 +391,15 @@ input::-webkit-inner-spin-button {
   -ms-flex-align: center;
   align-items: center;
   font-weight: bold; }
-  #dpiQualityIndicator i {
-    font-size: 24px;
-    margin-right: 12px;
-    text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.23); }
-  #dpiQualityIndicator i.fa-exclamation-circle {
-    color: #e53935; }
-  #dpiQualityIndicator i.fa-dot-circle {
-    color: #ffab00; }
-  #dpiQualityIndicator i.fa-check-circle {
-    color: #00c853; }
+  #dpiQualityIndicator svg {
+    font-size: 42px;
+    margin-right: 12px; }
+    #dpiQualityIndicator svg.error {
+      fill: #e53935; }
+    #dpiQualityIndicator svg.warning {
+      fill: #ffab00; }
+    #dpiQualityIndicator svg.success {
+      fill: #00c853; }
 
 .cropper-rotate-buttons {
   margin-bottom: 32px; }
@@ -414,6 +413,18 @@ input::-webkit-inner-spin-button {
 
 .fas.right {
   margin-left: 8px; }
+
+.icon {
+  fill: currentColor;
+  width: 1.3em;
+  height: 1.3em;
+  vertical-align: middle;
+  overflow: hidden;
+  margin-top: -2px; }
+  .icon.left {
+    margin-right: 4px; }
+  .icon.right {
+    margin-left: 4px; }
 
 .croppie-container {
   display: -webkit-box;
