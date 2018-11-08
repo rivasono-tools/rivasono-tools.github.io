@@ -63,7 +63,7 @@ span {
       .modal .modal-overlay .modal-container .closeModalButton {
         background: none;
         border: none;
-        color: #fff;
+        color: #333;
         font-size: 24px;
         padding: 0 32px; }
         .modal .modal-overlay .modal-container .closeModalButton:hover {

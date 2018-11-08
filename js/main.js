@@ -260,7 +260,12 @@
 
   // Event listeners
   DOM.cropModalSaveButton.addEventListener("click", () => {
-    download(fileToDownload.blob, fileToDownload.name, "image/jpg");
+    if (DOM.cropModalFileNameInput.value !== "") {
+      fileToDownload.name = DOM.cropModalFileNameInput.value;
+      download(fileToDownload.blob, fileToDownload.name, "image/jpg");
+    } else {
+      alert("Bestandsnaam is niet correct ingevuld.");
+    }
   });
 
   DOM.panelSizeConfirmButton.addEventListener("click", () => {
