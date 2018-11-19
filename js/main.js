@@ -254,7 +254,6 @@
       const croppedImageUrl = URL.createObjectURL(blob);
       DOM.cropModalImg.setAttribute("src", croppedImageUrl);
       fileToDownload.blob = blob;
-      console.log(`${filenameSplitFromExtension[0]}-BxH-${panel.width}x${panel.height}-cropped.jpg`);
     });
   }
 
