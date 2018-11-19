@@ -63,7 +63,8 @@
   // Cropped image properties
   let fileToDownload = {
     blob: "",
-    name: ""
+    name: "",
+    dpi: ""
   };
 
   // Cropper properties
@@ -221,6 +222,7 @@
         let liveCropHeight = Number(e.detail.points[3]) - Number(e.detail.points[1]);
         DOM.liveResolution.innerHTML = `${liveCropWidth} x ${liveCropHeight}`;
         let liveDpiValue = roundTo(0, liveCropWidth / (panel.width / 2.54));
+        fileToDownload.dpi = liveDpiValue;
         DOM.liveDpi.innerHTML = liveDpiValue;
         if (liveDpiValue < 50) {
           DOM.dpiQualityIndicator.innerHTML =
@@ -247,13 +249,17 @@
 
   function openCropModal() {
     changeVisibility("show", [DOM.cropModal]);
-    croppieInstance.result({ type: "blob", size: "original", format: "jpeg" }).then(blob => {
+    croppieInstance.result({ type: "blob", size: "original", format: "jpeg", quality: 1 }).then(blob => {
       const filenameSplitFromExtension = uploadInput.files[0].name.split(".");
-      fileToDownload.name = `${filenameSplitFromExtension[0]}-BxH-${panel.width}x${panel.height}-cropped.jpg`;
+      fileToDownload.name = `${filenameSplitFromExtension[0]}_BxH-${panel.width}x${panel.height}_DPI-${
+        fileToDownload.dpi
+      }.jpg`;
       DOM.cropModalFileNameInput.value = fileToDownload.name;
       const croppedImageUrl = URL.createObjectURL(blob);
       DOM.cropModalImg.setAttribute("src", croppedImageUrl);
-      fileToDownload.blob = blob;
+      changeDpiBlob(blob, fileToDownload.dpi).then(blob => {
+        fileToDownload.blob = blob;
+      });
     });
   }
 
