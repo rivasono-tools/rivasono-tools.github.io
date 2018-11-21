@@ -133,6 +133,18 @@ header {
     font-size: 26px;
     text-align: center;
     font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .header-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 8px;
+      img {
+        height: 28px;
+      }
+    }
   }
 }
 
