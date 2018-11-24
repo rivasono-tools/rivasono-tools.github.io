@@ -257,7 +257,10 @@
       DOM.cropModalFileNameInput.value = fileToDownload.name;
       const croppedImageUrl = URL.createObjectURL(blob);
       DOM.cropModalImg.setAttribute("src", croppedImageUrl);
-      changeDpiBlob(blob, fileToDownload.dpi).then(blob => {
+      /* changeDpiBlob(blob, fileToDownload.dpi).then(blob => {
+        fileToDownload.blob = blob;
+      }); */
+      changeDpiBlob(blob, 300).then(blob => {
         fileToDownload.blob = blob;
       });
     });
