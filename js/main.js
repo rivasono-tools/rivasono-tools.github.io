@@ -11,6 +11,8 @@
     imageUploadContainer: getEl("#image-upload-container"),
     panelRatioLabel: getEl("#panel-ratio-label"),
     panelPixelRatioLabelDpi50: getEl("#panel-pixel-ratio-label-dpi50"),
+    panelPixelRatioLabelDpi60: getEl("#panel-pixel-ratio-label-dpi60"),
+    panelPixelRatioLabelDpi80: getEl("#panel-pixel-ratio-label-dpi80"),
     panelPixelRatioLabelDpi100: getEl("#panel-pixel-ratio-label-dpi100"),
     cropperContainer: getEl(".cropper-container"),
     cropper: getEl(".cropper"),
@@ -26,6 +28,14 @@
     cropperMirrorButtonVertical: getEl(".cropper-mirror-button-vertical"),
     dpiQualityIndicator: getEl("#dpiQualityIndicator")
   };
+
+  let changelog = {
+    lastEntry: "12-12-2018"
+  };
+
+  if (localStorage.getItem("lastReadChangelog") !== changelog.lastEntry) {
+    openChangeLogModal();
+  }
 
   window.onload = () => {
     getEl(".header-title").style["padding-left"] = DOM.sideBar.clientWidth + "px";
@@ -142,9 +152,15 @@
     const panelHeightInches = panel.height / 2.54;
     const panelPixelWidthDpi50 = roundTo(0, panelWidthInches * 50);
     const panelPixelHeightDpi50 = roundTo(0, panelHeightInches * 50);
+    const panelPixelWidthDpi60 = roundTo(0, panelWidthInches * 60);
+    const panelPixelHeightDpi60 = roundTo(0, panelHeightInches * 60);
+    const panelPixelWidthDpi80 = roundTo(0, panelWidthInches * 80);
+    const panelPixelHeightDpi80 = roundTo(0, panelHeightInches * 80);
     const panelPixelWidthDpi100 = roundTo(0, panelWidthInches * 100);
     const panelPixelHeightDpi100 = roundTo(0, panelHeightInches * 100);
     DOM.panelPixelRatioLabelDpi50.innerHTML = `${panelPixelWidthDpi50} x ${panelPixelHeightDpi50} pixels`;
+    DOM.panelPixelRatioLabelDpi60.innerHTML = `${panelPixelWidthDpi60} x ${panelPixelHeightDpi60} pixels`;
+    DOM.panelPixelRatioLabelDpi80.innerHTML = `${panelPixelWidthDpi80} x ${panelPixelHeightDpi80} pixels`;
     DOM.panelPixelRatioLabelDpi100.innerHTML = `${panelPixelWidthDpi100} x ${panelPixelHeightDpi100} pixels`;
     panel.isSpecified = true;
   }
@@ -192,6 +208,10 @@
       getEl("#imgResolution").innerHTML = `${uploadedFile.width} x ${uploadedFile.height}`;
       getEl("#imgMaxSize50dpi").innerHTML =
         roundTo(1, (uploadedFile.width / 50) * 2.54) + " x " + roundTo(1, (uploadedFile.height / 50) * 2.54);
+      getEl("#imgMaxSize60dpi").innerHTML =
+        roundTo(1, (uploadedFile.width / 60) * 2.54) + " x " + roundTo(1, (uploadedFile.height / 60) * 2.54);
+      getEl("#imgMaxSize80dpi").innerHTML =
+        roundTo(1, (uploadedFile.width / 80) * 2.54) + " x " + roundTo(1, (uploadedFile.height / 80) * 2.54);
       getEl("#imgMaxSize100dpi").innerHTML =
         roundTo(1, (uploadedFile.width / 100) * 2.54) + " x " + roundTo(1, (uploadedFile.height / 100) * 2.54);
       uploadedFile.isUploaded = true;
@@ -224,15 +244,19 @@
         let liveDpiValue = roundTo(0, liveCropWidth / (panel.width / 2.54));
         fileToDownload.dpi = liveDpiValue;
         DOM.liveDpi.innerHTML = liveDpiValue;
+        console.log(liveDpiValue);
         if (liveDpiValue < 50) {
           DOM.dpiQualityIndicator.innerHTML =
-            "<svg class='icon left error' aria-hidden='true' focusable='false'><use xlink:href='img/symbol-defs.svg#icon-alert-circle-outline'></use></svg>De dpi is te laag, afbeelding wordt onscherp.";
-        } else if (liveDpiValue < 100) {
+            "<svg class='icon left error' aria-hidden='true' focusable='false'><use xlink:href='img/symbol-defs.svg#icon-alert-circle-outline'></use></svg>De dpi is minder dan 50 en is te laag, afbeelding wordt onscherp.";
+        } else if (liveDpiValue < 60) {
           DOM.dpiQualityIndicator.innerHTML =
-            "<svg class='icon left warning' aria-hidden='true' focusable='false'><use xlink:href='img/symbol-defs.svg#icon-alert-triangle-outline'></use></svg>De dpi is oké, afbeelding kan onscherp zijn van dichtbij.";
+            "<svg class='icon left warning' aria-hidden='true' focusable='false'><use xlink:href='img/symbol-defs.svg#icon-alert-triangle-outline'></use></svg>De dpi is tussen de 50 en 60, afbeelding wordt enigszins onscherp van dichtbij.";
+        } else if (liveDpiValue < 80) {
+          DOM.dpiQualityIndicator.innerHTML =
+            "<svg class='icon left success' aria-hidden='true' focusable='false'><use xlink:href='img/symbol-defs.svg#icon-checkmark-circle-2-outline'></use></svg>De dpi is tussen de 60 en 80, dit is een goede scherpte.";
         } else {
           DOM.dpiQualityIndicator.innerHTML =
-            "<svg class='icon left success' aria-hidden='true' focusable='false'><use xlink:href='img/symbol-defs.svg#icon-checkmark-circle-2-outline'></use></svg>De dpi is perfect! De afbeelding heeft maximale scherpte.";
+            "<svg class='icon left perfect' aria-hidden='true' focusable='false'><use xlink:href='img/symbol-defs.svg#icon-checkmark-circle-2-outline'></use></svg>De dpi is boven de 80! De afbeelding wordt zeer scherp.";
         }
       });
       getEl(".cropper-rotate-button-left").addEventListener("click", () => {
@@ -264,6 +288,15 @@
         fileToDownload.blob = blob;
       });
     });
+  }
+
+  function closeChangelogModal() {
+    getEl("#changelogModal").classList.add("hidden");
+    localStorage.setItem("lastReadChangelog", "12-12-2018");
+  }
+
+  function openChangeLogModal() {
+    getEl("#changelogModal").classList.remove("hidden");
   }
 
   // Event listeners
@@ -340,6 +373,18 @@
       croppieInstance.bind({ url: uploadedFile.url, zoom: 0, orientation: 1 });
       uploadedFile.orientation.y = "normal";
     }
+  });
+
+  getEl("#changelogReadButton").addEventListener("click", () => {
+    closeChangelogModal();
+  });
+
+  getEl("#changelogCloseButton").addEventListener("click", () => {
+    closeChangelogModal();
+  });
+
+  getEl("#openChangelogButton").addEventListener("click", () => {
+    openChangeLogModal();
   });
 
   // Common functions

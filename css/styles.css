@@ -12,6 +12,12 @@ h4 {
   font-weight: 600;
   font-family: "Nunito Sans", sans-serif; }
 
+h4 {
+  margin-bottom: 8px; }
+
+p {
+  margin-top: 0; }
+
 body {
   margin: 0;
   font-family: "Nunito", sans-serif;
@@ -60,6 +66,8 @@ span {
         background-color: #fff;
         border-bottom: 1px solid #d9d9d9;
         margin-bottom: 32px; }
+      .modal .modal-overlay .modal-container .modal-content {
+        padding: 0 32px 16px; }
       .modal .modal-overlay .modal-container .closeModalButton {
         background: none;
         border: none;
@@ -107,6 +115,26 @@ span {
         .modal .modal-overlay .modal-container .modal-buttons button {
           margin-left: 24px; }
 
+.changelog-change {
+  border-left: 4px solid #009ad9;
+  padding: 12px 0 12px 16px;
+  margin-bottom: 36px; }
+  .changelog-change h3 {
+    margin-top: 0; }
+
+.changelog-disclaimer {
+  font-size: 14px;
+  color: #999;
+  margin-top: 12px;
+  text-align: center; }
+
+table {
+  border-collapse: collapse; }
+  table th,
+  table td {
+    padding: 4px 8px;
+    border: 1px solid #999; }
+
 header {
   position: absolute;
   width: 100%;
@@ -123,12 +151,24 @@ header {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center; }
+    header .header-title .header-title-app-name {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center; }
+    header .header-title .header-title-changelog-button {
+      padding: 6px 12px; }
     header .header-title .header-icon {
       display: -webkit-box;
       display: -ms-flexbox;
@@ -198,7 +238,7 @@ input::-webkit-inner-spin-button {
 
 .container {
   position: relative;
-  padding-bottom: 32px; }
+  padding-bottom: 16px; }
   .container:first-child .container-header-container {
     border-top: none; }
   .container:last-child {
@@ -234,6 +274,7 @@ input::-webkit-inner-spin-button {
   padding: 12px 32px;
   text-align: center;
   margin-bottom: 12px;
+  border-top: 1px solid #d9d9d9;
   border-bottom: 1px solid #d9d9d9; }
 
 #panel-size-container .panel-size-inputs {
@@ -431,6 +472,8 @@ input::-webkit-inner-spin-button {
       fill: #ffab00; }
     #dpiQualityIndicator svg.success {
       fill: #00c853; }
+    #dpiQualityIndicator svg.perfect {
+      fill: #009ad9; }
 
 .cropper-rotate-buttons {
   margin-bottom: 32px; }

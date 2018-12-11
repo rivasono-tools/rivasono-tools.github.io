@@ -23,9 +23,17 @@
   <body>
     <header>
       <h1 class="header-title">
-          <div class="header-icon">
-            <img src="android-chrome-192x192.png" alt="Pixar Logo">
-          </div>Pixar</h1>
+        <div class="header-title-app-name">
+          <div class="header-icon"><img src="android-chrome-192x192.png" alt="Pixar Logo" /></div>
+          Pixar
+        </div>
+        <button class="header-title-changelog-button button" id="openChangelogButton">
+          <svg class="icon left" aria-hidden="true" focusable="false">
+            <use xlink:href="/img/symbol-defs.svg#icon-calendar-outline"></use>
+          </svg>
+          Toon updates
+        </button>
+      </h1>
     </header>
     <main>
       <div id="side-bar">
@@ -47,8 +55,10 @@
           <div class="specifications">
             <p class="spec">Verhouding:<span class="spec-value" id="imgRatio">?</span></p>
             <p class="spec">Resolutie (px):<span class="spec-value" id="imgResolution">?</span></p>
-            <h4 class="spec-header">Max. afmetingen (cm):</h4>
+            <h4 class="spec-header">Max. paneelgrootte (cm):</h4>
             <p class="spec">50 dpi:<span class="spec-value" id="imgMaxSize50dpi">?</span></p>
+            <p class="spec">60 dpi:<span class="spec-value" id="imgMaxSize60dpi">?</span></p>
+            <p class="spec">80 dpi:<span class="spec-value" id="imgMaxSize80dpi">?</span></p>
             <p class="spec">100 dpi:<span class="spec-value" id="imgMaxSize100dpi">?</span></p>
           </div>
         </div>
@@ -79,6 +89,8 @@
             <p class="spec">Beeldverhouding paneel: <span class="spec-value" id="panel-ratio-label">?</span></p>
             <h4 class="spec-header">Benodigde pixels afbeelding:</h4>
             <p class="spec">Bij 50 dpi: <span class="spec-value" id="panel-pixel-ratio-label-dpi50">?</span></p>
+            <p class="spec">Bij 60 dpi: <span class="spec-value" id="panel-pixel-ratio-label-dpi60">?</span></p>
+            <p class="spec">Bij 80 dpi: <span class="spec-value" id="panel-pixel-ratio-label-dpi80">?</span></p>
             <p class="spec">Bij 100 dpi: <span class="spec-value" id="panel-pixel-ratio-label-dpi100">?</span></p>
           </div>
         </div>
@@ -113,6 +125,68 @@
       </div>
     </div>
     <div id="canvas-container" class="hidden"><canvas id="pdfCanvas"></canvas></div>
+    <div class="modal hidden" id="changelogModal">
+      <div class="modal-overlay">
+        <div class="modal-container">
+          <div class="modal-title">
+            <h2>Updates</h2>
+            <button class="closeModalButton" id="changelogCloseButton">
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use xlink:href="/img/symbol-defs.svg#icon-close-outline"></use>
+              </svg>
+            </button>
+          </div>
+          <div class="modal-content">
+            <div class="changelog-change">
+              <h3>
+                <svg class="icon left" aria-hidden="true" focusable="false">
+                  <use xlink:href="/img/symbol-defs.svg#icon-calendar-outline"></use>
+                </svg>
+                12-12-2018
+              </h3>
+              <h4>Meer dpi definities</h4>
+              <p>
+                Naast de max paneelgrootte/benodigde pixels voor 50 en 100 dpi, worden ze nu ook voor 60 en 80 getoond.
+              </p>
+              <h4>Herdefinitie gradaties van scherpte</h4>
+              <p>
+                Waar voorheen de gradaties in scherpte 0-50/51-100/100+ waren volgt de scherptebeoordeling nu deze
+                tabel:
+              </p>
+              <table>
+                <tr>
+                  <td>Te laag</td>
+                  <td>50 of lager</td>
+                </tr>
+                <tr>
+                  <td>Laag, onscherp dichtbij</td>
+                  <td>51-60</td>
+                </tr>
+                <tr>
+                  <td>Goed</td>
+                  <td>61-80</td>
+                </tr>
+                <tr>
+                  <td>Uitstekend</td>
+                  <td>81 of hoger</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="modal-buttons">
+            <button class="button" id="changelogReadButton">
+              <svg class="icon left" aria-hidden="true" focusable="false">
+                <use xlink:href="/img/symbol-defs.svg#icon-checkmark-outline"></use>
+              </svg>
+              Gelezen
+            </button>
+            <span class="changelog-disclaimer"
+              >Zodra je de updates hebt gelezen, wordt dit schermpje niet meer getoond tot de volgende update.</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="modal hidden" id="cropModal">
       <div class="modal-overlay">
         <div class="modal-container">
