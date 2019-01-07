@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css?family=Nunito+Sans:400,700|Nunito:400,600,700");
 *,
 *::before,
 *::after {
@@ -10,7 +9,7 @@ h2,
 h3,
 h4 {
   font-weight: 600;
-  font-family: "Nunito Sans", sans-serif; }
+  font-family: "Inter UI", sans-serif; }
 
 h4 {
   margin-bottom: 8px; }
@@ -20,13 +19,13 @@ p {
 
 body {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: "Inter UI", sans-serif;
   color: #333;
   position: relative; }
 
 p,
 span {
-  font-size: 16px; }
+  font-size: 15px; }
 
 .modal {
   position: absolute;
@@ -206,7 +205,7 @@ main {
 input,
 button,
 select {
-  font-family: "Nunito", sans-serif;
+  font-family: "Inter UI", sans-serif;
   color: #333; }
 
 .button {
@@ -215,7 +214,7 @@ select {
   padding: 8px 12px;
   font-size: 16px;
   color: #fff;
-  font-weight: 700;
+  font-weight: 600;
   border: none;
   border-radius: 2px;
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -266,9 +265,9 @@ input::-webkit-inner-spin-button {
   align-items: center; }
 
 .container-header {
-  font-weight: 700;
-  font-size: 20px;
-  font-family: "Nunito Sans", sans-serif; }
+  font-weight: 600;
+  font-size: 18px;
+  font-family: "Inter UI", sans-serif; }
 
 .container-header-container {
   padding: 12px 32px;
@@ -373,7 +372,7 @@ input::-webkit-inner-spin-button {
 
 .spec-header {
   margin: 12px 0 0;
-  font-weight: bold; }
+  font-weight: 600; }
 
 .spec {
   position: relative;
@@ -521,3 +520,6 @@ input::-webkit-inner-spin-button {
     background-color: #009ad9;
     -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+    .croppie-container .cr-slider:focus {
+      -webkit-box-shadow: 0 0 0 3px #fff;
+      box-shadow: 0 0 0 3px #fff; }
