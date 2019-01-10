@@ -28,6 +28,13 @@
           <div class="header-icon"><img src="android-chrome-192x192.png" alt="Pixar Logo" /></div>
           Pixar
         </div>
+        <div class="flex-divider"></div>
+        <button class="header-title-changelog-button button" id="openColorConverterButton">
+          <svg class="icon left" aria-hidden="true" focusable="false">
+            <use xlink:href="/img/symbol-defs.svg#icon-pantone-outline"></use>
+          </svg>
+          Open kleurtabel
+        </button>
         <button class="header-title-changelog-button button" id="openChangelogButton">
           <svg class="icon left" aria-hidden="true" focusable="false">
             <use xlink:href="/img/symbol-defs.svg#icon-calendar-outline"></use>
@@ -126,6 +133,40 @@
       </div>
     </div>
     <div id="canvas-container" class="hidden"><canvas id="pdfCanvas"></canvas></div>
+    <div class="modal hidden" id="colorConverterModal">
+      <div class="modal-overlay">
+        <div class="modal-container">
+          <div class="modal-title">
+            <h2>Kleurtabel<small>Gebruik ctrl+f om te zoeken.</small></h2>
+            <button class="closeModalButton" id="colorConverterCloseButton">
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use xlink:href="/img/symbol-defs.svg#icon-close-outline"></use>
+              </svg>
+            </button>
+          </div>
+          <div class="modal-content">
+            <table class="colorConverterTable">
+              <thead>
+                <tr>
+                  <th> </th>
+                  <th>RAL</th>
+                  <th>Pantone</th>
+                  <th>CMYK</th>
+                  <th>Hex</th>
+                </tr>
+              </thead>
+              <tbody id="colorConverterTableBody">
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-buttons">
+            <button class="button" id="colorConverterCloseButtonFooter">
+              Sluiten
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="modal hidden" id="changelogModal">
       <div class="modal-overlay">
         <div class="modal-container">
@@ -138,6 +179,22 @@
             </button>
           </div>
           <div class="modal-content">
+            <div class="changelog-change">
+              <h3>
+                <svg class="icon left" aria-hidden="true" focusable="false">
+                  <use xlink:href="/img/symbol-defs.svg#icon-calendar-outline"></use>
+                </svg>
+                10-01-2019
+              </h3>
+              <h4>Kleurtabel</h4>
+              <p>
+                Welke Pantone code hoort bij welke RAL kleur? Zoek het op in de kleurtabel!
+              </p>
+              <p>
+                De kleurtabel is een lijst met elke RAL kleur en de bijbehorende Pantone, CMYK en Hex codes.
+              </p>
+            </div>
+            
             <div class="changelog-change">
               <h3>
                 <svg class="icon left" aria-hidden="true" focusable="false">
@@ -219,6 +276,7 @@
     <script src="js/changedpi-dist.js"></script>
     <script src="js/croppie.min.js"></script>
     <script src="js/download.js"></script>
+    <script src="js/colortable.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>

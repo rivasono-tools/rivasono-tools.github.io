@@ -53,6 +53,11 @@ span {
   font-size: 15px;
 }
 
+.flex-divider {
+  flex-grow: 1;
+  flex-basis: 0;
+}
+
 .modal {
   position: absolute;
   top: 0;
@@ -74,6 +79,12 @@ span {
       border-radius: 2px;
       box-shadow: $box-shadow3;
       .modal-title {
+        small {
+          font-size: 16px;
+          margin-left: 32px;
+          font-weight: 500;
+          color: $gray-darker;
+        }
         padding: 0 0 0 32px;
         display: flex;
         justify-content: space-between;
@@ -83,6 +94,8 @@ span {
       }
       .modal-content {
         padding: 0 32px 16px;
+        max-height: 60vh;
+        overflow: auto;
       }
       .closeModalButton {
         background: none;
@@ -106,6 +119,7 @@ span {
         }
       }
       .modal-buttons {
+        border-top: 1px solid $border-color;
         padding: 24px 32px;
         display: flex;
         justify-content: center;
@@ -168,7 +182,6 @@ header {
     text-align: center;
     font-weight: 700;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     .header-title-app-name {
       display: flex;
@@ -186,6 +199,9 @@ header {
       img {
         height: 28px;
       }
+    }
+    button {
+      margin-left: 16px;
     }
   }
 }
@@ -457,6 +473,37 @@ input::-webkit-inner-spin-button {
   }
   button:last-child {
     margin-left: 0;
+  }
+}
+
+.colorConverterTable {
+  width: 100%;
+  position: relative;
+  border-collapse: collapse;
+  border-left: 1px solid $border-color;
+  border-right: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+  overflow: auto;
+  max-height: 55vh;
+  background-color: $bg-light;
+  tr,
+  td,
+  th {
+    border: none;
+  }
+  thead th {
+    top: 0;
+    background-color: $primary;
+    color: #fff;
+    position: sticky;
+  }
+  tbody tr {
+    border-bottom: 1px solid $border-color;
+  }
+  th,
+  td {
+    padding: 6px 8px;
+    text-align: left;
   }
 }
 

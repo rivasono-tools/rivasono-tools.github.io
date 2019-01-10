@@ -30,7 +30,7 @@
   };
 
   let changelog = {
-    lastEntry: "12-12-2018"
+    lastEntry: "10-01-2019"
   };
 
   if (localStorage.getItem("lastReadChangelog") !== changelog.lastEntry) {
@@ -292,11 +292,19 @@
 
   function closeChangelogModal() {
     getEl("#changelogModal").classList.add("hidden");
-    localStorage.setItem("lastReadChangelog", "12-12-2018");
+    localStorage.setItem("lastReadChangelog", changelog.lastEntry);
   }
 
   function openChangeLogModal() {
     getEl("#changelogModal").classList.remove("hidden");
+  }
+
+  function closeColorConverterModal() {
+    getEl("#colorConverterModal").classList.add("hidden");
+  }
+
+  function openColorConverterModal() {
+    getEl("#colorConverterModal").classList.remove("hidden");
   }
 
   // Event listeners
@@ -385,6 +393,18 @@
 
   getEl("#openChangelogButton").addEventListener("click", () => {
     openChangeLogModal();
+  });
+
+  getEl("#colorConverterCloseButtonFooter").addEventListener("click", () => {
+    closeColorConverterModal();
+  });
+
+  getEl("#colorConverterCloseButton").addEventListener("click", () => {
+    closeColorConverterModal();
+  });
+
+  getEl("#openColorConverterButton").addEventListener("click", () => {
+    openColorConverterModal();
   });
 
   // Common functions

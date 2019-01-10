@@ -27,6 +27,13 @@ p,
 span {
   font-size: 15px; }
 
+.flex-divider {
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -ms-flex-preferred-size: 0;
+  flex-basis: 0; }
+
 .modal {
   position: absolute;
   top: 0;
@@ -65,8 +72,15 @@ span {
         background-color: #fff;
         border-bottom: 1px solid #d9d9d9;
         margin-bottom: 32px; }
+        .modal .modal-overlay .modal-container .modal-title small {
+          font-size: 16px;
+          margin-left: 32px;
+          font-weight: 500;
+          color: #595959; }
       .modal .modal-overlay .modal-container .modal-content {
-        padding: 0 32px 16px; }
+        padding: 0 32px 16px;
+        max-height: 60vh;
+        overflow: auto; }
       .modal .modal-overlay .modal-container .closeModalButton {
         background: none;
         border: none;
@@ -91,6 +105,7 @@ span {
           max-width: 866px;
           max-height: 500px; }
       .modal .modal-overlay .modal-container .modal-buttons {
+        border-top: 1px solid #d9d9d9;
         padding: 24px 32px;
         display: -webkit-box;
         display: -ms-flexbox;
@@ -150,9 +165,6 @@ header {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center; }
@@ -181,6 +193,8 @@ header {
       margin-right: 8px; }
       header .header-title .header-icon img {
         height: 28px; }
+    header .header-title button {
+      margin-left: 16px; }
 
 main {
   min-height: 100vh;
@@ -221,6 +235,7 @@ select {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   background-color: #009ad9;
   -ms-flex-item-align: center;
+  -ms-grid-row-align: center;
   align-self: center; }
   .button:hover {
     cursor: pointer;
@@ -480,6 +495,33 @@ input::-webkit-inner-spin-button {
     margin-right: 16px; }
   .cropper-rotate-buttons button:last-child {
     margin-left: 0; }
+
+.colorConverterTable {
+  width: 100%;
+  position: relative;
+  border-collapse: collapse;
+  border-left: 1px solid #d9d9d9;
+  border-right: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+  overflow: auto;
+  max-height: 55vh;
+  background-color: #fff; }
+  .colorConverterTable tr,
+  .colorConverterTable td,
+  .colorConverterTable th {
+    border: none; }
+  .colorConverterTable thead th {
+    top: 0;
+    background-color: #009ad9;
+    color: #fff;
+    position: -webkit-sticky;
+    position: sticky; }
+  .colorConverterTable tbody tr {
+    border-bottom: 1px solid #d9d9d9; }
+  .colorConverterTable th,
+  .colorConverterTable td {
+    padding: 6px 8px;
+    text-align: left; }
 
 .fas.left {
   margin-right: 8px; }
