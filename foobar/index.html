@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Foobar</title>
+    <link rel="stylesheet" href="./fonts/Inter UI/inter-ui.css" />
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <div class="columns">
+      <div class="column">
+        <div class="column-content">
+          <div class="content"><h4>Input</h1></div>
+          <div class="tabs is-boxed">
+            <ul>
+              <li class="is-active" data-tab="0"><a>HTML</a></li>
+              <li data-tab="1"><a>CSS</a></li>
+            </ul>
+          </div>
+          <div class="tab-content">
+            <div class="tab-content-box" data-tab="0">
+              <textarea name="wysiwyg-content" id="wysiwygContent"></textarea>
+            </div>
+            <div class="tab-content-box" data-tab="1">
+              <textarea name="wysiwyg-css" id="wysiwygCss" cols="30" rows="10"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="column-content">
+          <div class="content"><h4>Output</h1></div>
+          <div id="iframeContainer"></div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+    <script type="text/javascript" src="lib/main.js"></script>
+  </body>
+</html>
