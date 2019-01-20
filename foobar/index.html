@@ -12,7 +12,7 @@
     <div class="columns">
       <div class="column">
         <div class="column-content">
-          <div class="content"><h4>Input</h1></div>
+          <div class="content"><h4>Input</h4></div>
           <div class="tabs is-boxed">
             <ul>
               <li class="is-active" data-tab="0"><a>HTML</a></li>
@@ -20,18 +20,32 @@
             </ul>
           </div>
           <div class="tab-content">
-            <div class="tab-content-box" data-tab="0">
+            <div class="tab-content-box is-active" data-tab="0">
               <textarea name="wysiwyg-content" id="wysiwygContent"></textarea>
             </div>
             <div class="tab-content-box" data-tab="1">
-              <textarea name="wysiwyg-css" id="wysiwygCss" cols="30" rows="10"></textarea>
+              <div class="field">
+                <label class="label" for="wysiwygCssUrls">Direct URL</label>
+                <input type="text" class="input" id="wysiwygCssUrls" placeholder="URL..." />
+              </div>
+              <div class="field">
+                <label class="label" for="wysiwygCssRaw">Raw CSS</label>
+                <textarea
+                  class="textarea"
+                  id="wysiwygCssRaw"
+                  cols="30"
+                  rows="10"
+                  placeholder="Raw CSS here..."
+                ></textarea>
+              </div>
+              <div class="field"><button class="button is-primary" id="wysiwygCssSaveButton">Save</button></div>
             </div>
           </div>
         </div>
       </div>
       <div class="column">
         <div class="column-content">
-          <div class="content"><h4>Output</h1></div>
+          <div class="content"><h4>Output</h4></div>
           <div id="iframeContainer"></div>
         </div>
       </div>
