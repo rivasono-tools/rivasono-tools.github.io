@@ -507,6 +507,11 @@ input::-webkit-inner-spin-button {
   }
 }
 
+.warning {
+  color: $yellow;
+  font-weight: bold;
+}
+
 // Icon styling
 .fas.left {
   margin-right: 8px;

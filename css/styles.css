@@ -523,6 +523,10 @@ input::-webkit-inner-spin-button {
     padding: 6px 8px;
     text-align: left; }
 
+.warning {
+  color: #ffab00;
+  font-weight: bold; }
+
 .fas.left {
   margin-right: 8px; }
 
