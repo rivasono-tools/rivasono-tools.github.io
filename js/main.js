@@ -30,7 +30,7 @@
   };
 
   let changelog = {
-    lastEntry: "10-01-2019"
+    lastEntry: "22-02-2019"
   };
 
   if (localStorage.getItem("lastReadChangelog") !== changelog.lastEntry) {
