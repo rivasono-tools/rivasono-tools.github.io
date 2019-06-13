@@ -64,9 +64,9 @@
             <p class="spec">Verhouding:<span class="spec-value" id="imgRatio">?</span></p>
             <p class="spec">Resolutie (px):<span class="spec-value" id="imgResolution">?</span></p>
             <h4 class="spec-header">Max. paneelgrootte (cm):</h4>
-            <p class="spec">50 dpi:<span class="spec-value" id="imgMaxSize50dpi">?</span></p>
-            <p class="spec">60 dpi:<span class="spec-value" id="imgMaxSize60dpi">?</span></p>
-            <p class="spec">80 dpi:<span class="spec-value" id="imgMaxSize80dpi">?</span></p>
+            <p class="spec">40 dpi:<span class="spec-value" id="imgMaxSize40dpi">?</span></p>
+            <p class="spec">55 dpi:<span class="spec-value" id="imgMaxSize55dpi">?</span></p>
+            <p class="spec">70 dpi:<span class="spec-value" id="imgMaxSize70dpi">?</span></p>
             <p class="spec">100 dpi:<span class="spec-value" id="imgMaxSize100dpi">?</span></p>
           </div>
         </div>
@@ -96,9 +96,9 @@
           <div class="specifications">
             <p class="spec">Beeldverhouding paneel: <span class="spec-value" id="panel-ratio-label">?</span></p>
             <h4 class="spec-header">Benodigde pixels afbeelding:</h4>
-            <p class="spec">Bij 50 dpi: <span class="spec-value" id="panel-pixel-ratio-label-dpi50">?</span></p>
-            <p class="spec">Bij 60 dpi: <span class="spec-value" id="panel-pixel-ratio-label-dpi60">?</span></p>
-            <p class="spec">Bij 80 dpi: <span class="spec-value" id="panel-pixel-ratio-label-dpi80">?</span></p>
+            <p class="spec">Bij 40 dpi: <span class="spec-value" id="panel-pixel-ratio-label-dpi40">?</span></p>
+            <p class="spec">Bij 55 dpi: <span class="spec-value" id="panel-pixel-ratio-label-dpi55">?</span></p>
+            <p class="spec">Bij 70 dpi: <span class="spec-value" id="panel-pixel-ratio-label-dpi70">?</span></p>
             <p class="spec">Bij 100 dpi: <span class="spec-value" id="panel-pixel-ratio-label-dpi100">?</span></p>
           </div>
         </div>
@@ -179,6 +179,41 @@
             </button>
           </div>
           <div class="modal-content">
+            <div class="changelog-change">
+              <h3>
+                <svg class="icon left" aria-hidden="true" focusable="false">
+                  <use xlink:href="/img/symbol-defs.svg#icon-calendar-outline"></use>
+                </svg>
+                13-06-2019
+              </h3>
+              <h4>Aanpassing DPI minimum</h4>
+              <p>
+                Waar de minimum DPI waarde eerst 50 was, is deze nu verlaagd naar 40, aangezien uit praktijk is gebleken
+                dat dat voldoende is. Ook zijn de grenzen voor een goede en uitstekende scherpte iets omlaag gekomen.
+              </p>
+              <p>
+                De scherptebeoordeling volgt nu deze tabel:
+              </p>
+              <table>
+                <tr>
+                  <td>Te laag</td>
+                  <td>40 of lager</td>
+                </tr>
+                <tr>
+                  <td>Laag, onscherp dichtbij</td>
+                  <td>41-55</td>
+                </tr>
+                <tr>
+                  <td>Goed</td>
+                  <td>56-70</td>
+                </tr>
+                <tr>
+                  <td>Uitstekend</td>
+                  <td>71 of hoger</td>
+                </tr>
+              </table>
+            </div>
+
             <div class="changelog-change">
               <h3>
                 <svg class="icon left" aria-hidden="true" focusable="false">
