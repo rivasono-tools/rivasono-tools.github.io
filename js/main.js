@@ -265,7 +265,7 @@
         croppieInstance.rotate(-90);
       });
       loadingSpinner("hide");
-      // changeVisibility("show", [getEl(".cropper-rotate-buttons")]);
+      changeVisibility("show", [getEl(".cropper-rotate-buttons")]);
       changeVisibility("show", [DOM.cropButton]);
     }
   }

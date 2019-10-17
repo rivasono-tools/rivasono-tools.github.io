@@ -113,10 +113,26 @@
       </div>
       <div class="cropper-container container">
         <div class="cropper-rotate-buttons hidden">
-          <button class="button cropper-rotate-button-left">Draai linksom</button>
-          <button class="button cropper-mirror-button-horizontal">Spiegel horizontaal</button>
-          <button class="button cropper-mirror-button-vertical">Spiegel verticaal</button>
-          <button class="button cropper-rotate-button-right">Draai rechtsom</button>
+          <button class="button cropper-rotate-button-left">
+            <svg class="icon left flip-x" aria-hidden="true" focusable="false">
+              <use xlink:href="/img/symbol-defs.svg#icon-refresh-outline"></use></svg
+            >Draai linksom
+          </button>
+          <button class="button cropper-mirror-button-horizontal">
+            <svg class="icon left" aria-hidden="true" focusable="false">
+              <use xlink:href="/img/symbol-defs.svg#icon-shuffle-2-outline"></use></svg
+            >Spiegel horizontaal
+          </button>
+          <button class="button cropper-mirror-button-vertical">
+            <svg class="icon left rotate270" aria-hidden="true" focusable="false">
+              <use xlink:href="/img/symbol-defs.svg#icon-shuffle-2-outline"></use></svg
+            >Spiegel verticaal
+          </button>
+          <button class="button cropper-rotate-button-right">
+            <svg class="icon left" aria-hidden="true" focusable="false">
+              <use xlink:href="/img/symbol-defs.svg#icon-refresh-outline"></use></svg
+            >Draai rechtsom
+          </button>
         </div>
         <div class="cropper"><img src="" alt="" id="previewImg" /></div>
         <button class="button hidden" id="cropButton">
