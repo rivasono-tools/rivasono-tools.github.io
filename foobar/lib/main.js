@@ -1,172 +1,154 @@
 "use strict";
 
 var wysiwygContent = getEl("#wysiwygContent");
-var iframeContainer = getEl("#iframeContainer");
-var previewIframe = document.createElement("iframe");
-var previewIframeDocument = "";
-iframeContainer.appendChild(previewIframe);
 var wysiwygCssUrls = getEl("#wysiwygCssUrls");
 var wysiwygCssRaw = getEl("#wysiwygCssRaw");
 var wysiwygCssSaveButton = getEl("#wysiwygCssSaveButton");
+var akoestiekDirectCssButton = getEl("#akoestiekDirectCssButton");
 
 document.addEventListener("DOMContentLoaded", function () {
-  previewIframeDocument = previewIframe.contentWindow.document;
   initTinyMCE();
-  initTabs();
 
   // EventListeners
   wysiwygCssSaveButton.addEventListener("click", function () {
-    updateIframe();
+    applyCss();
+  });
+
+  akoestiekDirectCssButton.addEventListener("click", () => {
+    initTinyMCE(
+      [
+        "https://cdn.shopify.com/s/files/1/0528/8227/6515/t/4/assets/theme.css?v=" +
+          makeid(10),
+        "https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&family=Rubik:wght@400;500;600;700&display=swap"
+      ],
+      `
+        body {
+          background-color: unset;
+          color: unset;
+          font-family: unset;
+          font-size: unset;
+          line-height: unset;
+          scrollbar-3dlight-color: #F0F0EE;
+          scrollbar-arrow-color: #676662;
+          scrollbar-base-color: #F0F0EE;
+          scrollbar-darkshadow-color: #DDDDDD;
+          scrollbar-face-color: #E0E0DD;
+          scrollbar-highlight-color: #F0F0EE;
+          scrollbar-shadow-color: #F0F0EE;
+          scrollbar-track-color: #F5F5F5;
+        }
+
+        td,
+        th {
+          font-family: unset;
+          font-size: unset;
+        }
+
+        :root {
+          --default-text-font-size : 15px;
+          --base-text-font-size    : 15px;
+          --heading-font-family    : Oxygen, sans-serif;
+          --heading-font-weight    : 700;
+          --heading-font-style     : normal;
+          --text-font-family       : Rubik, sans-serif;
+          --text-font-weight       : 400;
+          --text-font-style        : normal;
+          --text-font-bolder-weight: 500;
+          --text-link-decoration   : underline;
+
+          --text-color               : #132a40;
+          --text-color-rgb           : 19, 42, 64;
+          --heading-color            : #1c3f61;
+          --border-color             : #e8e8e8;
+          --border-color-rgb         : 232, 232, 232;
+          --form-border-color        : #dbdbdb;
+          --accent-color             : #ea580d;
+          --accent-color-rgb         : 234, 88, 13;
+          --link-color               : #ea580d;
+          --link-color-hover         : #a23d09;
+          --background               : #f5f5f5;
+          --secondary-background     : #ffffff;
+          --secondary-background-rgb : 255, 255, 255;
+          --accent-background        : rgba(234, 88, 13, 0.08);
+
+          --input-background: #ffffff;
+
+          --error-color       : #ea580d;
+          --error-background  : rgba(234, 88, 13, 0.07);
+          --success-color     : #1c7b36;
+          --success-background: rgba(28, 123, 54, 0.11);
+
+          --primary-button-background      : #ea580d;
+          --primary-button-background-rgb  : 234, 88, 13;
+          --primary-button-text-color      : #ffffff;
+          --secondary-button-background    : #1c3f61;
+          --secondary-button-background-rgb: 28, 63, 97;
+          --secondary-button-text-color    : #ffffff;
+
+          --header-background      : #1c3f61;
+          --header-text-color      : #ffffff;
+          --header-light-text-color: #e8e8e8;
+          --header-border-color    : rgba(232, 232, 232, 0.3);
+          --header-accent-color    : #ea580d;
+
+          --footer-background-color:    #1c3f61;
+          --footer-heading-text-color:  #ffffff;
+          --footer-body-text-color:     #ffffff;
+          --footer-body-text-color-rgb: 255, 255, 255;
+          --footer-accent-color:        #ea580d;
+          --footer-accent-color-rgb:    234, 88, 13;
+          --footer-border:              none;
+
+          --flickity-arrow-color: #b5b5b5;--product-on-sale-accent           : #ea580d;
+          --product-on-sale-accent-rgb       : 234, 88, 13;
+          --product-on-sale-color            : #ffffff;
+          --product-in-stock-color           : #1c7b36;
+          --product-low-stock-color          : #ea580d;
+          --product-sold-out-color           : #8a9297;
+          --product-custom-label-1-background: #3f6ab1;
+          --product-custom-label-1-color     : #ffffff;
+          --product-custom-label-2-background: #8a44ae;
+          --product-custom-label-2-color     : #ffffff;
+          --product-review-star-color        : #ffbd00;
+
+          --mobile-container-gutter : 20px;
+          --desktop-container-gutter: 40px;
+        }
+      `
+    );
   });
 });
 
 function applyCss() {
-  var cssUrls = wysiwygCssUrls.value;
+  var cssUrls = wysiwygCssUrls.value.split(",");
   var cssRaw = wysiwygCssRaw.value;
-  var cssLink = document.createElement("link");
-  cssLink.rel = "stylesheet";
-  cssLink.type = "text/css";
-  cssLink.href = cssUrls;
-  var cssStyle = document.createElement("link");
-  cssStyle.rel = "stylesheet";
-  cssStyle.type = "text/css";
-  cssStyle.href = "data:text/css;charset=UTF-8," + encodeURIComponent(cssRaw);
-  if (cssUrls != "" && !cssStyle != "") {} else {
-    console.log("hi");
-    if (wysiwygContent.value == "") {
-      previewIframeDocument.close();
-      previewIframeDocument.open();
-      previewIframeDocument.write("<span>&nbsp;</span>");
-    }
-    previewIframeDocument.head.appendChild(cssLink);
-    previewIframeDocument.head.appendChild(cssStyle);
-  }
-}
-
-function updateIframe() {
-  previewIframeDocument.close();
-  previewIframeDocument.open();
-  previewIframeDocument.write(wysiwygContent.value);
-  console.log(previewIframeDocument);
-  applyCss();
+  initTinyMCE(cssUrls, cssRaw);
 }
 
 // TinyMCE Init
-function initTinyMCE() {
+function initTinyMCE(contentCSS, contentStyle) {
+  console.log("initting");
+  tinymce.remove();
   tinymce.init({
     selector: "#wysiwygContent",
-    height: 580,
+    height: 800,
     setup: function setup(editor) {
       editor.on("NodeChange", function () {
         editor.save();
-        if (!wysiwygContent.value == "") {
-          updateIframe();
-        }
       });
     },
+    content_css: contentCSS,
+    content_style: contentStyle,
     theme: "modern",
-    plugins: ["advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker", "searchreplace wordcount visualblocks visualchars fullscreen insertdatetime media mediaembed nonbreaking imagetools", "save table contextmenu directionality emoticons template paste textcolor code"],
-    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons | fontsizeselect | code",
+    plugins: [
+      "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+      "searchreplace wordcount visualblocks visualchars fullscreen insertdatetime media mediaembed nonbreaking imagetools",
+      "save table contextmenu directionality emoticons template paste textcolor code"
+    ],
+    toolbar:
+      "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons | fontsizeselect | code",
     image_advtab: true
   });
-}
-
-function initTabs() {
-  var tabWrappers = document.querySelectorAll(".tabs");
-  if (tabWrappers.length > 0) {
-    tabWrappers.forEach(function (tabWrapper) {
-      var tabWrapperUl = tabWrapper.children[0];
-      var tabWrapperLiList = tabWrapperUl.children;
-
-      var tabContent = tabWrapper.nextElementSibling;
-      var tabContentTabList = tabContent.children;
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
-
-      try {
-        var _loop = function _loop() {
-          var tabWrapperLi = _step.value;
-
-          tabWrapperLi.addEventListener("click", function () {
-            if (!tabWrapperLi.classList.contains("is-active")) {
-              var _iteratorNormalCompletion2 = true;
-              var _didIteratorError2 = false;
-              var _iteratorError2 = undefined;
-
-              try {
-                for (var _iterator2 = tabWrapperLiList[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                  var _tabWrapperLi = _step2.value;
-
-                  _tabWrapperLi.classList.remove("is-active");
-                }
-              } catch (err) {
-                _didIteratorError2 = true;
-                _iteratorError2 = err;
-              } finally {
-                try {
-                  if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                    _iterator2.return();
-                  }
-                } finally {
-                  if (_didIteratorError2) {
-                    throw _iteratorError2;
-                  }
-                }
-              }
-
-              tabWrapperLi.classList.add("is-active");
-
-              var _iteratorNormalCompletion3 = true;
-              var _didIteratorError3 = false;
-              var _iteratorError3 = undefined;
-
-              try {
-                for (var _iterator3 = tabContentTabList[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-                  var tabContentTab = _step3.value;
-
-                  tabContentTab.classList.remove("is-active");
-                  if (tabWrapperLi.getAttribute("data-tab") == tabContentTab.getAttribute("data-tab")) {
-                    tabContentTab.classList.add("is-active");
-                  }
-                }
-              } catch (err) {
-                _didIteratorError3 = true;
-                _iteratorError3 = err;
-              } finally {
-                try {
-                  if (!_iteratorNormalCompletion3 && _iterator3.return) {
-                    _iterator3.return();
-                  }
-                } finally {
-                  if (_didIteratorError3) {
-                    throw _iteratorError3;
-                  }
-                }
-              }
-            }
-          });
-        };
-
-        for (var _iterator = tabWrapperLiList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          _loop();
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator.return) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
-      }
-    });
-  }
 }
 
 // Helper functions
@@ -179,4 +161,15 @@ function getEl(selector) {
   } else {
     return foundElements;
   }
+}
+
+function makeid(length) {
+  var result = "";
+  var characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
 }

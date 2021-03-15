@@ -6,48 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Foobar</title>
     <link rel="stylesheet" href="./fonts/Inter UI/inter-ui.css" />
-    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="_sass/main.min.css" />
   </head>
   <body>
-    <div class="columns">
-      <div class="column">
-        <div class="column-content">
-          <div class="content"><h4>Input</h4></div>
-          <div class="tabs is-boxed">
-            <ul>
-              <li class="is-active" data-tab="0"><a>HTML</a></li>
-              <li data-tab="1"><a>CSS</a></li>
-            </ul>
-          </div>
-          <div class="tab-content">
-            <div class="tab-content-box is-active" data-tab="0">
-              <textarea name="wysiwyg-content" id="wysiwygContent"></textarea>
-            </div>
-            <div class="tab-content-box" data-tab="1">
-              <div class="field">
-                <label class="label" for="wysiwygCssUrls">Direct URL</label>
-                <input type="text" class="input" id="wysiwygCssUrls" placeholder="URL..." />
-              </div>
-              <div class="field">
-                <label class="label" for="wysiwygCssRaw">Raw CSS</label>
-                <textarea
-                  class="textarea"
-                  id="wysiwygCssRaw"
-                  cols="30"
-                  rows="10"
-                  placeholder="Raw CSS here..."
-                ></textarea>
-              </div>
-              <div class="field"><button class="button is-primary" id="wysiwygCssSaveButton">Save</button></div>
-            </div>
-          </div>
+    <main>
+      <header>
+        <h1 class="title">Foobar</h1>
+        <div class="header-buttons">
+          <button class="button is-primary" id="akoestiekDirectCssButton">
+            Apply Akoestiek-Direct css
+          </button>
         </div>
+      </header>
+      <textarea name="wysiwyg-content" id="wysiwygContent"></textarea>
+    </main>
+    <div class="is-hidden">
+      <div class="field">
+        <label class="label" for="wysiwygCssUrls">Direct URL(s)</label>
+        <textarea
+          class="textarea"
+          id="wysiwygCssUrls"
+          cols="30"
+          rows="10"
+          placeholder="1 url or more (comma seperated)..."
+        ></textarea>
       </div>
-      <div class="column">
-        <div class="column-content">
-          <div class="content"><h4>Output</h4></div>
-          <div id="iframeContainer"></div>
-        </div>
+      <div class="field">
+        <label class="label" for="wysiwygCssRaw">Raw CSS</label>
+        <textarea
+          class="textarea"
+          id="wysiwygCssRaw"
+          cols="30"
+          rows="10"
+          placeholder="Raw CSS here..."
+        ></textarea>
+      </div>
+      <div class="field">
+        <button class="button is-primary" id="wysiwygCssSaveButton">
+          Save
+        </button>
       </div>
     </div>
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
