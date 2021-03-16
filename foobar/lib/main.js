@@ -1,24 +1,16 @@
 "use strict";
 
 var wysiwygContent = getEl("#wysiwygContent");
-var wysiwygCssUrls = getEl("#wysiwygCssUrls");
-var wysiwygCssRaw = getEl("#wysiwygCssRaw");
-var wysiwygCssSaveButton = getEl("#wysiwygCssSaveButton");
 var akoestiekDirectCssButton = getEl("#akoestiekDirectCssButton");
 
 document.addEventListener("DOMContentLoaded", function () {
   initTinyMCE();
 
-  // EventListeners
-  wysiwygCssSaveButton.addEventListener("click", function () {
-    applyCss();
-  });
-
   akoestiekDirectCssButton.addEventListener("click", () => {
     initTinyMCE(
       [
         "https://cdn.shopify.com/s/files/1/0528/8227/6515/t/4/assets/theme.css?v=" +
-          makeid(10),
+        makeid(10),
         "https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&family=Rubik:wght@400;500;600;700&display=swap"
       ],
       `
@@ -131,7 +123,7 @@ function initTinyMCE(contentCSS, contentStyle) {
   tinymce.remove();
   tinymce.init({
     selector: "#wysiwygContent",
-    height: 800,
+    height: "100%",
     setup: function setup(editor) {
       editor.on("NodeChange", function () {
         editor.save();
@@ -139,10 +131,10 @@ function initTinyMCE(contentCSS, contentStyle) {
     },
     content_css: contentCSS,
     content_style: contentStyle,
-    theme: "modern",
+    theme: "silver",
     plugins: [
       "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
-      "searchreplace wordcount visualblocks visualchars fullscreen insertdatetime media mediaembed nonbreaking imagetools",
+      "searchreplace wordcount visualblocks visualchars fullscreen insertdatetime media nonbreaking imagetools",
       "save table contextmenu directionality emoticons template paste textcolor code"
     ],
     toolbar:

@@ -27,15 +27,21 @@ button {
   font-family: $family-sans-serif;
 }
 
-main {
-  margin: 0 auto;
-  max-width: 1400px;
+html {
+  overflow-y: auto;
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
 }
 
 header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 30px;
 }
 
 .title {
