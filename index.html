@@ -4,42 +4,50 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Pixar</title>
+    <title>VISIO Afbeeldingscontrole</title>
     <link rel="stylesheet" href="css/croppie.css" />
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/styles.min.css" />
     <link rel="stylesheet" href="/fonts/Inter UI/inter-ui.css" />
 
     <!-- Favicon business -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
-    <meta name="apple-mobile-web-app-title" content="Pixar" />
-    <meta name="application-name" content="Pixar" />
-    <meta name="msapplication-TileColor" content="#ffffff" />
-    <meta name="theme-color" content="#ffffff" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/apple-touch-icon.png?1"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon-32x32.png?1"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon-16x16.png?1"
+    />
+    <link rel="manifest" href="/site.webmanifest?1" />
   </head>
 
   <body>
     <header>
       <h1 class="header-title">
         <div class="header-title-app-name">
-          <div class="header-icon"><img src="android-chrome-192x192.png" alt="Pixar Logo" /></div>
-          Pixar
+          <div class="header-icon">
+            <img src="android-chrome-192x192.png" alt="Pixar Logo" />
+          </div>
+          VISIO Afbeeldingscontrole
         </div>
         <div class="flex-divider"></div>
-        <button class="header-title-changelog-button button" id="openColorConverterButton">
+        <button
+          class="header-title-changelog-button button"
+          id="openColorConverterButton"
+        >
           <svg class="icon left" aria-hidden="true" focusable="false">
             <use xlink:href="/img/symbol-defs.svg#icon-pantone-outline"></use>
           </svg>
           Open kleurtabel
-        </button>
-        <button class="header-title-changelog-button button" id="openChangelogButton">
-          <svg class="icon left" aria-hidden="true" focusable="false">
-            <use xlink:href="/img/symbol-defs.svg#icon-calendar-outline"></use>
-          </svg>
-          Toon updates
         </button>
       </h1>
     </header>
@@ -57,25 +65,50 @@
           </label>
           <input class="upload-input hidden" type="file" id="uploadInput" />
           <div class="specifications file-specifications">
-            <p class="spec">Bestandsnaam:<span class="spec-value file-uploaded-message">?</span></p>
+            <p class="spec">
+              Bestandsnaam:<span class="spec-value file-uploaded-message"
+                >?</span
+              >
+            </p>
           </div>
           <hr />
           <div class="specifications">
-            <p class="spec">Verhouding:<span class="spec-value" id="imgRatio">?</span></p>
-            <p class="spec">Resolutie (px):<span class="spec-value" id="imgResolution">?</span></p>
+            <p class="spec">
+              Verhouding:<span class="spec-value" id="imgRatio">?</span>
+            </p>
+            <p class="spec">
+              Resolutie (px):<span class="spec-value" id="imgResolution"
+                >?</span
+              >
+            </p>
             <h4 class="spec-header">Max. paneelgrootte (cm):</h4>
-            <p class="spec">40 dpi:<span class="spec-value" id="imgMaxSize40dpi">?</span></p>
-            <p class="spec">55 dpi:<span class="spec-value" id="imgMaxSize55dpi">?</span></p>
-            <p class="spec">70 dpi:<span class="spec-value" id="imgMaxSize70dpi">?</span></p>
-            <p class="spec">100 dpi:<span class="spec-value" id="imgMaxSize100dpi">?</span></p>
+            <p class="spec">
+              40 dpi:<span class="spec-value" id="imgMaxSize40dpi">?</span>
+            </p>
+            <p class="spec">
+              55 dpi:<span class="spec-value" id="imgMaxSize55dpi">?</span>
+            </p>
+            <p class="spec">
+              70 dpi:<span class="spec-value" id="imgMaxSize70dpi">?</span>
+            </p>
+            <p class="spec">
+              100 dpi:<span class="spec-value" id="imgMaxSize100dpi">?</span>
+            </p>
           </div>
         </div>
         <div id="panel-size-container" class="container">
-          <div class="container-header-container"><span class="container-header">Gegevens gewenst paneel</span></div>
+          <div class="container-header-container">
+            <span class="container-header">Gegevens gewenst paneel</span>
+          </div>
           <div class="panel-size-inputs">
             <div class="input-group">
               <label for="panel-width">Breedte (cm)</label>
-              <input type="number" name="panel-width" id="panel-width" placeholder="0" />
+              <input
+                type="number"
+                name="panel-width"
+                id="panel-width"
+                placeholder="0"
+              />
             </div>
             <span class="panel-size-inputs-divider">
               <svg class="icon" aria-hidden="true" focusable="false">
@@ -84,30 +117,67 @@
             </span>
             <div class="input-group">
               <label for="panel-height">Hoogte (cm)</label>
-              <input type="number" name="panel-height" id="panel-height" placeholder="0" />
+              <input
+                type="number"
+                name="panel-height"
+                id="panel-height"
+                placeholder="0"
+              />
             </div>
             <button class="button" id="panel-size-confirm">
               <svg class="icon" aria-hidden="true" focusable="false">
-                <use xlink:href="/img/symbol-defs.svg#icon-checkmark-outline"></use>
+                <use
+                  xlink:href="/img/symbol-defs.svg#icon-checkmark-outline"
+                ></use>
               </svg>
             </button>
           </div>
           <hr />
           <div class="specifications">
-            <p class="spec">Beeldverhouding paneel: <span class="spec-value" id="panel-ratio-label">?</span></p>
+            <p class="spec">
+              Beeldverhouding paneel:
+              <span class="spec-value" id="panel-ratio-label">?</span>
+            </p>
             <h4 class="spec-header">Benodigde pixels afbeelding:</h4>
-            <p class="spec">Bij 40 dpi: <span class="spec-value" id="panel-pixel-ratio-label-dpi40">?</span></p>
-            <p class="spec">Bij 55 dpi: <span class="spec-value" id="panel-pixel-ratio-label-dpi55">?</span></p>
-            <p class="spec">Bij 70 dpi: <span class="spec-value" id="panel-pixel-ratio-label-dpi70">?</span></p>
-            <p class="spec">Bij 100 dpi: <span class="spec-value" id="panel-pixel-ratio-label-dpi100">?</span></p>
+            <p class="spec">
+              Bij 40 dpi:
+              <span class="spec-value" id="panel-pixel-ratio-label-dpi40"
+                >?</span
+              >
+            </p>
+            <p class="spec">
+              Bij 55 dpi:
+              <span class="spec-value" id="panel-pixel-ratio-label-dpi55"
+                >?</span
+              >
+            </p>
+            <p class="spec">
+              Bij 70 dpi:
+              <span class="spec-value" id="panel-pixel-ratio-label-dpi70"
+                >?</span
+              >
+            </p>
+            <p class="spec">
+              Bij 100 dpi:
+              <span class="spec-value" id="panel-pixel-ratio-label-dpi100"
+                >?</span
+              >
+            </p>
           </div>
         </div>
         <div id="comparison-container" class="container">
-          <div class="container-header-container"><span class="container-header">Gegevens na bijsnijden</span></div>
+          <div class="container-header-container">
+            <span class="container-header">Gegevens na bijsnijden</span>
+          </div>
           <div class="specifications">
-            <p class="spec">Resolutie (px): <span class="spec-value" id="liveResolution">?</span></p>
-            <p class="spec">Dpi na bijsnijden:<span class="spec-value" id="liveDpi">?</span></p>
-            <p class="spec " id="dpiQualityIndicator"></p>
+            <p class="spec">
+              Resolutie (px):
+              <span class="spec-value" id="liveResolution">?</span>
+            </p>
+            <p class="spec">
+              Dpi na bijsnijden:<span class="spec-value" id="liveDpi">?</span>
+            </p>
+            <p class="spec" id="dpiQualityIndicator"></p>
           </div>
         </div>
       </div>
@@ -115,22 +185,34 @@
         <div class="cropper-rotate-buttons hidden">
           <button class="button cropper-rotate-button-left">
             <svg class="icon left flip-x" aria-hidden="true" focusable="false">
-              <use xlink:href="/img/symbol-defs.svg#icon-refresh-outline"></use></svg
+              <use
+                xlink:href="/img/symbol-defs.svg#icon-refresh-outline"
+              ></use></svg
             >Draai linksom
           </button>
           <button class="button cropper-mirror-button-horizontal">
             <svg class="icon left" aria-hidden="true" focusable="false">
-              <use xlink:href="/img/symbol-defs.svg#icon-shuffle-2-outline"></use></svg
+              <use
+                xlink:href="/img/symbol-defs.svg#icon-shuffle-2-outline"
+              ></use></svg
             >Spiegel horizontaal
           </button>
           <button class="button cropper-mirror-button-vertical">
-            <svg class="icon left rotate270" aria-hidden="true" focusable="false">
-              <use xlink:href="/img/symbol-defs.svg#icon-shuffle-2-outline"></use></svg
+            <svg
+              class="icon left rotate270"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <use
+                xlink:href="/img/symbol-defs.svg#icon-shuffle-2-outline"
+              ></use></svg
             >Spiegel verticaal
           </button>
           <button class="button cropper-rotate-button-right">
             <svg class="icon left" aria-hidden="true" focusable="false">
-              <use xlink:href="/img/symbol-defs.svg#icon-refresh-outline"></use></svg
+              <use
+                xlink:href="/img/symbol-defs.svg#icon-refresh-outline"
+              ></use></svg
             >Draai rechtsom
           </button>
         </div>
@@ -145,10 +227,14 @@
     </main>
     <div id="loadingSpinnerModal" class="modal hidden">
       <div class="loading-spinner-container modal-overlay">
-        <div class="loading-spinner-content"><i class="fas fa-spinner fa-spin"></i> <span>Laden...</span></div>
+        <div class="loading-spinner-content">
+          <i class="fas fa-spinner fa-spin"></i> <span>Laden...</span>
+        </div>
       </div>
     </div>
-    <div id="canvas-container" class="hidden"><canvas id="pdfCanvas"></canvas></div>
+    <div id="canvas-container" class="hidden">
+      <canvas id="pdfCanvas"></canvas>
+    </div>
     <div class="modal hidden" id="colorConverterModal">
       <div class="modal-overlay">
         <div class="modal-container">
@@ -163,8 +249,11 @@
           <div class="modal-content">
             <p class="warning">
               <svg class="icon left" aria-hidden="true" focusable="false">
-                <use xlink:href="/img/symbol-defs.svg#icon-alert-triangle-outline"></use></svg
-              >De pantone kleuren zijn niet volledig accuraat, controleer deze eerst even.
+                <use
+                  xlink:href="/img/symbol-defs.svg#icon-alert-triangle-outline"
+                ></use></svg
+              >De pantone kleuren zijn niet volledig accuraat, controleer deze
+              eerst even.
             </p>
             <table class="colorConverterTable">
               <thead>
@@ -179,127 +268,10 @@
               <tbody id="colorConverterTableBody"></tbody>
             </table>
           </div>
-          <div class="modal-buttons"><button class="button" id="colorConverterCloseButtonFooter">Sluiten</button></div>
-        </div>
-      </div>
-    </div>
-    <div class="modal hidden" id="changelogModal">
-      <div class="modal-overlay">
-        <div class="modal-container">
-          <div class="modal-title">
-            <h2>Updates</h2>
-            <button class="closeModalButton" id="changelogCloseButton">
-              <svg class="icon" aria-hidden="true" focusable="false">
-                <use xlink:href="/img/symbol-defs.svg#icon-close-outline"></use>
-              </svg>
-            </button>
-          </div>
-          <div class="modal-content">
-            <div class="changelog-change">
-              <h3>
-                <svg class="icon left" aria-hidden="true" focusable="false">
-                  <use xlink:href="/img/symbol-defs.svg#icon-calendar-outline"></use>
-                </svg>
-                13-06-2019
-              </h3>
-              <h4>Aanpassing DPI minimum</h4>
-              <p>
-                Waar de minimum DPI waarde eerst 50 was, is deze nu verlaagd naar 40, aangezien uit praktijk is gebleken
-                dat dat voldoende is. Ook zijn de grenzen voor een goede en uitstekende scherpte iets omlaag gekomen.
-              </p>
-              <p>
-                De scherptebeoordeling volgt nu deze tabel:
-              </p>
-              <table>
-                <tr>
-                  <td>Te laag</td>
-                  <td>40 of lager</td>
-                </tr>
-                <tr>
-                  <td>Laag, onscherp dichtbij</td>
-                  <td>41-55</td>
-                </tr>
-                <tr>
-                  <td>Goed</td>
-                  <td>56-70</td>
-                </tr>
-                <tr>
-                  <td>Uitstekend</td>
-                  <td>71 of hoger</td>
-                </tr>
-              </table>
-            </div>
-
-            <div class="changelog-change">
-              <h3>
-                <svg class="icon left" aria-hidden="true" focusable="false">
-                  <use xlink:href="/img/symbol-defs.svg#icon-calendar-outline"></use>
-                </svg>
-                09-02-2019
-              </h3>
-              <h4>Nieuwe URL</h4>
-              <p>Pixar woont nu op een nieuw adres: tools.rivasono.nl</p>
-              <p>De oude url (rivasono-tools.github.io) leidt automatisch naar het nieuwe adres.</p>
-            </div>
-
-            <div class="changelog-change">
-              <h3>
-                <svg class="icon left" aria-hidden="true" focusable="false">
-                  <use xlink:href="/img/symbol-defs.svg#icon-calendar-outline"></use>
-                </svg>
-                10-01-2019
-              </h3>
-              <h4>Kleurtabel</h4>
-              <p>Welke Pantone code hoort bij welke RAL kleur? Zoek het op in de kleurtabel!</p>
-              <p>De kleurtabel is een lijst met elke RAL kleur en de bijbehorende Pantone, CMYK en Hex codes.</p>
-            </div>
-
-            <div class="changelog-change">
-              <h3>
-                <svg class="icon left" aria-hidden="true" focusable="false">
-                  <use xlink:href="/img/symbol-defs.svg#icon-calendar-outline"></use>
-                </svg>
-                12-12-2018
-              </h3>
-              <h4>Meer dpi definities</h4>
-              <p>
-                Naast de max paneelgrootte/benodigde pixels voor 50 en 100 dpi, worden ze nu ook voor 60 en 80 getoond.
-              </p>
-              <h4>Herdefinitie gradaties van scherpte</h4>
-              <p>
-                Waar voorheen de gradaties in scherpte 0-50/51-100/100+ waren volgt de scherptebeoordeling nu deze
-                tabel:
-              </p>
-              <table>
-                <tr>
-                  <td>Te laag</td>
-                  <td>50 of lager</td>
-                </tr>
-                <tr>
-                  <td>Laag, onscherp dichtbij</td>
-                  <td>51-60</td>
-                </tr>
-                <tr>
-                  <td>Goed</td>
-                  <td>61-80</td>
-                </tr>
-                <tr>
-                  <td>Uitstekend</td>
-                  <td>81 of hoger</td>
-                </tr>
-              </table>
-            </div>
-          </div>
           <div class="modal-buttons">
-            <button class="button" id="changelogReadButton">
-              <svg class="icon left" aria-hidden="true" focusable="false">
-                <use xlink:href="/img/symbol-defs.svg#icon-checkmark-outline"></use>
-              </svg>
-              Gelezen
+            <button class="button" id="colorConverterCloseButtonFooter">
+              Sluiten
             </button>
-            <span class="changelog-disclaimer"
-              >Zodra je de updates hebt gelezen, wordt dit schermpje niet meer getoond tot de volgende update.</span
-            >
           </div>
         </div>
       </div>
@@ -315,11 +287,19 @@
               </svg>
             </button>
           </div>
-          <div class="crop-modal-img-container"><img src="" alt="" id="cropModalImg" /></div>
+          <div class="crop-modal-img-container">
+            <img src="" alt="" id="cropModalImg" />
+          </div>
           <div class="modal-buttons">
             <div class="input-group">
-              <label for="cropModalFileName">Bestandsnaam gecropte afbeelding:</label>
-              <input type="text" name="cropModalFileName" id="cropModalFileNameInput" />
+              <label for="cropModalFileName"
+                >Bestandsnaam gecropte afbeelding:</label
+              >
+              <input
+                type="text"
+                name="cropModalFileName"
+                id="cropModalFileNameInput"
+              />
             </div>
             <button class="button" id="cropModalSaveButton">
               <svg class="icon left" aria-hidden="true" focusable="false">

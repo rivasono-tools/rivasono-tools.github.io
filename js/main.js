@@ -1,4 +1,4 @@
-(function() {
+(function () {
   // DOM Elements
   const DOM = {
     header: getEl("header"),
@@ -26,20 +26,14 @@
     closeCropModalButton: getEl("#closeCropModalButton"),
     cropperMirrorButtonHorizontal: getEl(".cropper-mirror-button-horizontal"),
     cropperMirrorButtonVertical: getEl(".cropper-mirror-button-vertical"),
-    dpiQualityIndicator: getEl("#dpiQualityIndicator")
+    dpiQualityIndicator: getEl("#dpiQualityIndicator"),
   };
-
-  let changelog = {
-    lastEntry: "13-06-2019"
-  };
-
-  if (localStorage.getItem("lastReadChangelog") !== changelog.lastEntry) {
-    openChangeLogModal();
-  }
 
   window.onload = () => {
-    getEl(".header-title").style["padding-left"] = DOM.sideBar.clientWidth + "px";
-    DOM.cropperContainer.style["padding-top"] = DOM.header.clientHeight + 32 + "px";
+    getEl(".header-title").style["padding-left"] =
+      DOM.sideBar.clientWidth + "px";
+    DOM.cropperContainer.style["padding-top"] =
+      DOM.header.clientHeight + 32 + "px";
   };
 
   // Uploaded image properties
@@ -51,12 +45,12 @@
     height: 0,
     ratio: {
       width: 0,
-      height: 0
+      height: 0,
     },
     orientation: {
       x: "normal",
-      y: "normal"
-    }
+      y: "normal",
+    },
   };
 
   // Panel properties
@@ -66,15 +60,15 @@
     height: 0,
     ratio: {
       width: 0,
-      height: 0
-    }
+      height: 0,
+    },
   };
 
   // Cropped image properties
   let fileToDownload = {
     blob: "",
     name: "",
-    dpi: ""
+    dpi: "",
   };
 
   // Cropper properties
@@ -82,7 +76,7 @@
     instance: "",
     isInitialized: false,
     width: 600,
-    height: 600
+    height: 600,
   };
 
   // Functions
@@ -94,9 +88,13 @@
     panel.width = DOM.panelWidthInput.value;
     panel.height = DOM.panelHeightInput.value;
     if (panel.width === "") {
-      alert("Paneelbreedte is onjuist ingevoerd! Gebruik een komma in plaats van een punt.");
+      alert(
+        "Paneelbreedte is onjuist ingevoerd! Gebruik een komma in plaats van een punt."
+      );
     } else if (panel.height === "") {
-      alert("Paneelhoogte is onjuist ingevoerd! Gebruik een komma in plaats van een punt.");
+      alert(
+        "Paneelhoogte is onjuist ingevoerd! Gebruik een komma in plaats van een punt."
+      );
     } else if (isNaN(panel.width)) {
       alert("Ingevoerde paneelbreedte is geen getal!");
     } else if (isNaN(panel.height)) {
@@ -111,9 +109,13 @@
       panel.width = Number(panel.width);
       panel.height = Number(panel.height);
       if (panel.width.countDecimals() > 1) {
-        alert("Ingevoerde paneelbreedte heeft teveel decimalen! Het maximum is 1.");
+        alert(
+          "Ingevoerde paneelbreedte heeft teveel decimalen! Het maximum is 1."
+        );
       } else if (panel.height.countDecimals() > 1) {
-        alert("Ingevoerde paneelhoogte heeft teveel decimalen! Het maximum is 1.");
+        alert(
+          "Ingevoerde paneelhoogte heeft teveel decimalen! Het maximum is 1."
+        );
       } else {
         calculateRatio(panel);
         showPanelRatio();
@@ -183,7 +185,7 @@
       pdf.getPage(1).then(page => {
         const renderContext = {
           canvasContext: pdfCanvas.getContext("2d"),
-          viewport: page.getViewport(1)
+          viewport: page.getViewport(1),
         };
         pdfCanvas.width = renderContext.viewport.width;
         pdfCanvas.height = renderContext.viewport.height;
@@ -198,22 +200,37 @@
 
   function previewUploadedImg() {
     getEl(".file-uploaded-message").innerHTML = `${uploadInput.files[0].name}`;
-    getEl(".file-uploaded-message").setAttribute("title", `${uploadInput.files[0].name}`);
+    getEl(".file-uploaded-message").setAttribute(
+      "title",
+      `${uploadInput.files[0].name}`
+    );
     previewImg.setAttribute("src", uploadedFile.url);
     previewImg.onload = () => {
       uploadedFile.width = previewImg.naturalWidth;
       uploadedFile.height = previewImg.naturalHeight;
       calculateRatio(uploadedFile);
-      getEl("#imgRatio").innerHTML = `${uploadedFile.ratio.width} : ${uploadedFile.ratio.height}`;
-      getEl("#imgResolution").innerHTML = `${uploadedFile.width} x ${uploadedFile.height}`;
+      getEl(
+        "#imgRatio"
+      ).innerHTML = `${uploadedFile.ratio.width} : ${uploadedFile.ratio.height}`;
+      getEl(
+        "#imgResolution"
+      ).innerHTML = `${uploadedFile.width} x ${uploadedFile.height}`;
       getEl("#imgMaxSize40dpi").innerHTML =
-        roundTo(1, (uploadedFile.width / 40) * 2.54) + " x " + roundTo(1, (uploadedFile.height / 40) * 2.54);
+        roundTo(1, (uploadedFile.width / 40) * 2.54) +
+        " x " +
+        roundTo(1, (uploadedFile.height / 40) * 2.54);
       getEl("#imgMaxSize55dpi").innerHTML =
-        roundTo(1, (uploadedFile.width / 55) * 2.54) + " x " + roundTo(1, (uploadedFile.height / 55) * 2.54);
+        roundTo(1, (uploadedFile.width / 55) * 2.54) +
+        " x " +
+        roundTo(1, (uploadedFile.height / 55) * 2.54);
       getEl("#imgMaxSize70dpi").innerHTML =
-        roundTo(1, (uploadedFile.width / 70) * 2.54) + " x " + roundTo(1, (uploadedFile.height / 70) * 2.54);
+        roundTo(1, (uploadedFile.width / 70) * 2.54) +
+        " x " +
+        roundTo(1, (uploadedFile.height / 70) * 2.54);
       getEl("#imgMaxSize100dpi").innerHTML =
-        roundTo(1, (uploadedFile.width / 100) * 2.54) + " x " + roundTo(1, (uploadedFile.height / 100) * 2.54);
+        roundTo(1, (uploadedFile.width / 100) * 2.54) +
+        " x " +
+        roundTo(1, (uploadedFile.height / 100) * 2.54);
       uploadedFile.isUploaded = true;
       loadCropper();
     };
@@ -231,15 +248,20 @@
         croppieInstance = new Croppie(DOM.cropper, {
           enableExif: true,
           enableOrientation: true,
-          viewport: { width: croppie.width / panel.ratio.height, height: croppie.height / panel.ratio.width },
-          boundary: { width: croppie.width, height: croppie.height }
+          viewport: {
+            width: croppie.width / panel.ratio.height,
+            height: croppie.height / panel.ratio.width,
+          },
+          boundary: { width: croppie.width, height: croppie.height },
         });
         croppie.isInitialized = true;
       }
       croppieInstance.bind({ url: uploadedFile.url, zoom: 0 });
       DOM.cropper.addEventListener("update", e => {
-        let liveCropWidth = Number(e.detail.points[2]) - Number(e.detail.points[0]);
-        let liveCropHeight = Number(e.detail.points[3]) - Number(e.detail.points[1]);
+        let liveCropWidth =
+          Number(e.detail.points[2]) - Number(e.detail.points[0]);
+        let liveCropHeight =
+          Number(e.detail.points[3]) - Number(e.detail.points[1]);
         DOM.liveResolution.innerHTML = `${liveCropWidth} x ${liveCropHeight}`;
         let liveDpiValue = roundTo(0, liveCropWidth / (panel.width / 2.54));
         fileToDownload.dpi = liveDpiValue;
@@ -272,30 +294,21 @@
 
   function openCropModal() {
     changeVisibility("show", [DOM.cropModal]);
-    croppieInstance.result({ type: "blob", size: "original", format: "jpeg", quality: 1 }).then(blob => {
-      const filenameSplitFromExtension = uploadInput.files[0].name.split(".");
-      fileToDownload.name = `${filenameSplitFromExtension[0]}_BxH-${panel.width}x${panel.height}_DPI-${
-        fileToDownload.dpi
-      }.jpg`;
-      DOM.cropModalFileNameInput.value = fileToDownload.name;
-      const croppedImageUrl = URL.createObjectURL(blob);
-      DOM.cropModalImg.setAttribute("src", croppedImageUrl);
-      /* changeDpiBlob(blob, fileToDownload.dpi).then(blob => {
+    croppieInstance
+      .result({ type: "blob", size: "original", format: "jpeg", quality: 1 })
+      .then(blob => {
+        const filenameSplitFromExtension = uploadInput.files[0].name.split(".");
+        fileToDownload.name = `${filenameSplitFromExtension[0]}_BxH-${panel.width}x${panel.height}_DPI-${fileToDownload.dpi}.jpg`;
+        DOM.cropModalFileNameInput.value = fileToDownload.name;
+        const croppedImageUrl = URL.createObjectURL(blob);
+        DOM.cropModalImg.setAttribute("src", croppedImageUrl);
+        /* changeDpiBlob(blob, fileToDownload.dpi).then(blob => {
         fileToDownload.blob = blob;
       }); */
-      changeDpiBlob(blob, 300).then(blob => {
-        fileToDownload.blob = blob;
+        changeDpiBlob(blob, 300).then(blob => {
+          fileToDownload.blob = blob;
+        });
       });
-    });
-  }
-
-  function closeChangelogModal() {
-    getEl("#changelogModal").classList.add("hidden");
-    localStorage.setItem("lastReadChangelog", changelog.lastEntry);
-  }
-
-  function openChangeLogModal() {
-    getEl("#changelogModal").classList.remove("hidden");
   }
 
   function closeColorConverterModal() {
@@ -382,18 +395,6 @@
     }
   });
 
-  getEl("#changelogReadButton").addEventListener("click", () => {
-    closeChangelogModal();
-  });
-
-  getEl("#changelogCloseButton").addEventListener("click", () => {
-    closeChangelogModal();
-  });
-
-  getEl("#openChangelogButton").addEventListener("click", () => {
-    openChangeLogModal();
-  });
-
   getEl("#colorConverterCloseButtonFooter").addEventListener("click", () => {
     closeColorConverterModal();
   });
@@ -420,7 +421,7 @@
     }
   }
 
-  Number.prototype.countDecimals = function() {
+  Number.prototype.countDecimals = function () {
     if (Math.floor(this.valueOf()) === this.valueOf()) return 0;
     return this.toString().split(".")[1].length || 0;
   };
